@@ -5,7 +5,7 @@ import { sitePath } from "../lib/url";
 
 const title = `Page not found — ${SITE_NAME}`;
 const description =
-  "This page does not exist. Return to No Black Swan or explore how we work.";
+  "This page does not exist. Return to The Home School Barn home page or browse the library of printable learning resources for curious children.";
 ---
 
 <BaseLayout
@@ -23,9 +23,11 @@ const description =
     <p class="type-body mt-lg">
       <a href={sitePath("/")}>Home</a>
       ·
-      <a href={sitePath("/services/")}>Services</a>
+      <a href={sitePath("/resources/")}>Resources</a>
       ·
-      <a href={sitePath("/how-it-works/")}>The Process</a>
+      <a href={sitePath("/collections/")}>Collections</a>
+      ·
+      <a href={sitePath("/articles/")}>Articles</a>
     </p>
   </main>
 </BaseLayout>

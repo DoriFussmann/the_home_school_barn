@@ -3,8 +3,8 @@ import "@fontsource/inter/latin-300.css";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "../styles/global.css";
-import { abs, authorUrl, orgId, orgNode, websiteNode } from "seo-core";
-import { AUTHOR_PATH, CONTACT_EMAIL, DEFAULT_OG_IMAGE, ORG_ALTERNATE_NAMES, ORG_KNOWS_ABOUT, SITE_DESCRIPTION, SITE_IDENTITY, SITE_NAME, SITE_URL } from "../config/site";
+import { abs, orgId, orgNode, websiteNode } from "seo-core";
+import { CONTACT_EMAIL, DEFAULT_OG_IMAGE, ORG_ALTERNATE_NAMES, ORG_AUDIENCE, ORG_KNOWS_ABOUT, SITE_DESCRIPTION, SITE_IDENTITY, SITE_NAME, SITE_TAGLINE, SITE_URL } from "../config/site";
 import { ANALYTICS_ID, SEARCH_CONSOLE_VERIFICATION } from "../config/publicEnv";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -82,16 +82,21 @@ const withAlternateNames = (node: unknown): unknown => {
   if (!node || typeof node !== "object") return node;
   const record = node as Record<string, unknown>;
   if (record["@type"] === "Organization" && record["@id"] === ownOrgId) {
+    // No founder, address or areaServed: the business has no public founder
+    // profile or physical location, and its market is OPEN in the intake.
     return {
       ...record,
       alternateName: ORG_ALTERNATE_NAMES,
       description: SITE_DESCRIPTION,
-      slogan: "Everyone on your team uses AI. Nobody owns it. We do.",
-      email: CONTACT_EMAIL,
-      founder: { "@id": authorUrl("dori-fussmann", SITE_URL, AUTHOR_PATH), name: "Dori Fussmann" },
-      areaServed: ["United States", "United Kingdom", "Canada", "Australia", "Europe"],
+      slogan: SITE_TAGLINE,
       knowsAbout: ORG_KNOWS_ABOUT,
-      contactPoint: { "@type": "ContactPoint", contactType: "sales", email: CONTACT_EMAIL, url: `${SITE_URL}/book-call/` },
+      audience: { "@type": "Audience", audienceType: ORG_AUDIENCE },
+      ...(CONTACT_EMAIL
+        ? {
+            email: CONTACT_EMAIL,
+            contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL },
+          }
+        : {}),
     };
   }
   return node;
@@ -117,13 +122,14 @@ const jsonLdDocument =
           />
           <script
             is:inline
-            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ANALYTICS_ID.replace(/[^a-zA-Z0-9-]/g, "")}');document.addEventListener('click',function(e){var t=e.target;var a=t&&t.closest?t.closest('a[href*="/book-call"]'):null;if(a){gtag('event','cta_book_call_click',{link_text:(a.textContent||'').trim().slice(0,80)});}});`}
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ANALYTICS_ID.replace(/[^a-zA-Z0-9-]/g, "")}');`}
           />
         </>
       )
     }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/logo.png" type="image/png" />
     <meta name="theme-color" content="#F6F8F5" />
     <title>{title}</title>

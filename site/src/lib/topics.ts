@@ -1,71 +1,55 @@
 /**
- * Topic hubs: one page per core keyword. `name` must match articles' pillarKeyword exactly.
- * `pillar` is the slug of the topic's core article; check it once that article is published.
+ * Topic hubs: one page per content pillar (the five initial pillars in the intake).
+ * `name` must match articles' pillarKeyword exactly.
+ * `pillar` is the slug of the topic's core article; nothing is published yet, so
+ * each is set to the hub slug. Check it once that article is published.
  * A hub is only built once it has at least one published article (see liveTopics).
  */
 export const TOPICS = [
   {
-    "name": "fractional ai",
-    "slug": "fractional-ai",
-    "pillar": "who-should-own-ai-in-a-company",
-    "title": "Who Owns AI: Head of AI or Fractional Lead | No Black Swan",
-    "h1": "Fractional AI and the head of AI",
-    "description": "Who should own AI in a startup or growing company: a full-time head of AI, a fractional AI lead, or an outside partner who implements the work with your team.",
-    "intro": "Your team already uses AI, but nobody owns it. These guides compare a head of AI, a fractional AI lead and an outside partner, and what each costs you in time and focus."
+    "name": "history and civilizations",
+    "slug": "history-and-civilizations",
+    "pillar": "history-and-civilizations",
+    "title": "Teaching History to Children | The Home School Barn",
+    "h1": "History and civilizations",
+    "description": "Ways to explore history and ancient civilizations with children aged 3 to 10: thoughtful ideas, conversations and printable learning resources for families.",
+    "intro": "How to bring the past to life for young children: people, places and civilizations, explored through stories, conversation and hands-on discovery."
   },
   {
-    "name": "ai integration",
-    "slug": "ai-integration",
-    "pillar": "ai-integration",
-    "title": "How to Integrate AI Into Your Business | No Black Swan",
-    "h1": "AI integration",
-    "description": "Step-by-step guides to integrating AI into a business: readiness, finding the right opportunities, building a roadmap, automation, systems and pilots.",
-    "intro": "How to bring AI into the way your business actually works: from checking readiness and picking opportunities to running pilots and connecting it to your systems."
+    "name": "science and the natural world",
+    "slug": "science-and-the-natural-world",
+    "pillar": "science-and-the-natural-world",
+    "title": "Science and Nature for Children | The Home School Barn",
+    "h1": "Science and the natural world",
+    "description": "Ideas for exploring science and nature with young children: observation, discovery and printable resources that explain how the world works at their level.",
+    "intro": "Helping curious children understand the world around them, from how the Earth formed to the plants and animals outside the door."
   },
   {
-    "name": "ai consulting",
-    "slug": "ai-consulting",
-    "pillar": "ai-consulting",
-    "title": "AI Consulting: Options, Cost, Vetting | No Black Swan",
-    "h1": "AI consulting and implementation partners",
-    "description": "What AI consulting is, what you should get from it, how the options compare, what drives the cost, and how to vet an AI implementation partner.",
-    "intro": "Before you hire outside help with AI: the kinds of partners available, what each delivers, how fees are structured, and the questions to ask before you sign."
+    "name": "mathematics and discovery",
+    "slug": "mathematics-and-discovery",
+    "pillar": "mathematics-and-discovery",
+    "title": "Hands-On Math for Young Children | The Home School Barn",
+    "h1": "Mathematics and discovery",
+    "description": "Hands-on ways to explore numbers, shapes, patterns and fractions with children aged 3 to 10, with practical activities and printable learning resources.",
+    "intro": "Practical, hands-on ways to explore numbers, patterns and shapes, so that math becomes something children discover rather than just practice."
   },
   {
-    "name": "ai for operations",
-    "slug": "ai-for-operations",
-    "pillar": "ai-for-operations",
-    "title": "AI for Operations-Heavy Businesses | No Black Swan",
-    "h1": "AI for operations-heavy businesses",
-    "description": "Where AI helps construction, trucking, field service and distribution businesses: dispatch, scheduling, calls, estimates, inventory and back-office work.",
-    "intro": "Practical AI for businesses that run on crews, trucks and inventory: where to start, which workflows pay back first, and where AI doesn't belong yet."
+    "name": "seasons, holidays and traditions",
+    "slug": "seasons-holidays-and-traditions",
+    "pillar": "seasons-holidays-and-traditions",
+    "title": "Seasonal Learning for Children | The Home School Barn",
+    "h1": "Seasons, holidays and traditions",
+    "description": "Meaningful learning activities for the seasons, holidays and traditions through the year, with ideas and printable resources for children aged 3 to 10.",
+    "intro": "Learning that follows the year: seasons, holidays and traditions explored with children through activities, conversation and observation."
   },
   {
-    "name": "ai for professional services",
-    "slug": "ai-for-professional-services",
-    "pillar": "ai-for-professional-services",
-    "title": "AI for Professional Services Firms | No Black Swan",
-    "h1": "AI for professional services firms",
-    "description": "How agencies, accounting and law firms and clinic groups use AI to cut admin, speed up client delivery and protect billable hours and margin.",
-    "intro": "For founder-led services firms: where AI removes admin, shortens delivery and improves margin without changing what clients pay you for."
-  },
-  {
-    "name": "ai adoption",
-    "slug": "ai-adoption",
-    "pillar": "ai-adoption",
-    "title": "AI Adoption: Getting Your Team to Use AI | No Black Swan",
-    "h1": "AI adoption",
-    "description": "How to get a team to change how it works with AI: training, change management, AI policy, handling resistance and building internal champions.",
-    "intro": "Tools are the easy part. These guides cover the people side of AI: training, policy, resistance, and turning a few early users into champions."
-  },
-  {
-    "name": "ai roi",
-    "slug": "ai-roi",
-    "pillar": "ai-roi",
-    "title": "AI ROI: Measuring Whether AI Pays Off | No Black Swan",
-    "h1": "AI ROI and cost",
-    "description": "How to measure whether AI pays off: real costs, avoiding wasted tools, AI versus hiring, and how to tell where AI doesn't belong in your business.",
-    "intro": "What AI really costs and how to tell whether it pays back, including the tools that go unused and the cases where hiring or doing nothing is the better call."
+    "name": "geography, culture and the world",
+    "slug": "geography-culture-and-the-world",
+    "pillar": "geography-culture-and-the-world",
+    "title": "Geography and Cultures for Children | The Home School Barn",
+    "h1": "Geography, culture and the world",
+    "description": "Ideas for exploring geography, maps and cultures around the world with young children, with thoughtful activities and printable learning resources.",
+    "intro": "Exploring the wider world with children: places, maps, peoples and cultures, approached with curiosity and care."
   }
 ] as const satisfies readonly {
   name: string;
@@ -84,10 +68,10 @@ export function topicByName(name: string | undefined): Topic | undefined {
   return TOPICS.find((topic) => topic.name === name.trim());
 }
 
-const ACRONYMS: Record<string, string> = { ai: "AI", roi: "ROI", fde: "FDE", crm: "CRM", erp: "ERP" };
+const ACRONYMS: Record<string, string> = {};
 const SMALL_WORDS = new Set(["a", "an", "and", "for", "in", "of", "or", "the", "to", "vs"]);
 
-/** Display label for a lowercase topic name: "ai for operations" -> "AI for Operations". */
+/** Display label for a lowercase topic name: "history and civilizations" -> "History and Civilizations". */
 export function topicLabel(name: string): string {
   return name
     .trim()

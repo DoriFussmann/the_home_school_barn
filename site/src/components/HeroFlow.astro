@@ -1,208 +1,192 @@
 ---
-// Home hero: the engagement flow, as one animated card that steps through
-// five stages (same rail-and-autoplay pattern as the Hey Rupert hero).
-// Understand → Identify → Design → Implement → Measure, optimize, repeat.
-// Autoplay pauses on hover, focus or a hidden tab; the rail jumps to any
-// step; reduced motion shows each step still.
+// Home hero: how the library works, as one animated card that steps through
+// the five steps in the intake (WORKING DIRECTION):
+// Explore → Find → Choose → Receive → Enjoy together.
+// No product names, prices, counts or claims. Autoplay pauses on hover, focus
+// or a hidden tab; the rail jumps to any step; reduced motion shows each step still.
 const STEPS = [
-  { name: "Understand", stage: "Understand & Identify", title: "We understand the business", text: "How it runs today: teams, systems and the way work gets done.", visual: `<svg viewBox="0 0 520 180" class="nbf-svg" aria-hidden="true">
-  <g class="fi" style="--d:0ms"><rect class="lane-band" x="0" y="0" width="520" height="46" rx="8"/><text class="t t--sm t--muted lane-label" x="12" y="27.0">Sales</text></g>
-  <g class="fi" style="--d:80ms"><rect class="lane-band" x="0" y="52" width="520" height="46" rx="8"/><text class="t t--sm t--muted lane-label" x="12" y="79.0">Ops</text></g>
-  <g class="fi" style="--d:160ms"><rect class="lane-band" x="0" y="104" width="520" height="46" rx="8"/><text class="t t--sm t--muted lane-label" x="12" y="131.0">Finance</text></g>
-  <path class="draw" pathLength="1" d="M152 23.0 L168 23.0" style="--d:350ms"/>
-  <path class="draw" pathLength="1" d="M240 23.0 L242.0 23.0 Q248.0 23.0 248.0 29.0 L248.0 69.0 Q248.0 75.0 254.0 75.0 L256 75.0" style="--d:520ms"/>
-  <path class="draw" pathLength="1" d="M328 75.0 L344 75.0" style="--d:690ms"/>
-  <path class="draw" pathLength="1" d="M416 75.0 L418.0 75.0 Q424.0 75.0 424.0 81.0 L424.0 121.0 Q424.0 127.0 430.0 127.0 L432 127.0" style="--d:860ms"/>
-  <g class="fi" style="--d:250ms"><rect class="node" x="80" y="6.0" width="72" height="34" rx="8"/><text class="t t--sm t--b" x="90" y="21.0">New lead</text><text class="t t--xs t--muted" x="90" y="33.0">CRM</text></g>
-  <g class="fi" style="--d:420ms"><rect class="node" x="168" y="6.0" width="72" height="34" rx="8"/><text class="t t--sm t--b" x="178" y="21.0">Proposal</text><text class="t t--xs t--muted" x="178" y="33.0">Docs</text></g>
-  <g class="fi" style="--d:590ms"><rect class="node" x="256" y="58.0" width="72" height="34" rx="8"/><text class="t t--sm t--b" x="266" y="73.0">Kickoff</text><text class="t t--xs t--muted" x="266" y="85.0">Email</text></g>
-  <g class="fi" style="--d:760ms"><rect class="node" x="344" y="58.0" width="72" height="34" rx="8"/><text class="t t--sm t--b" x="354" y="73.0">Delivery</text><text class="t t--xs t--muted" x="354" y="85.0">Sheets</text></g>
-  <g class="fi" style="--d:930ms"><rect class="node" x="432" y="110.0" width="72" height="34" rx="8"/><text class="t t--sm t--b" x="442" y="125.0">Invoice</text><text class="t t--xs t--muted" x="442" y="137.0">Billing</text></g>
-  <g class="pop" style="--d:770ms"><circle class="handoff" cx="248.0" cy="49.0" r="4"/></g>
-  <g class="pop" style="--d:1110ms"><circle class="handoff" cx="424.0" cy="101.0" r="4"/></g>
-  <g class="fi" style="--d:1250ms"><circle class="handoff" cx="16" cy="170" r="3.5"/><text class="t t--sm t--muted" x="26" y="174">Handoff</text><text class="t t--sm t--brass t--b" x="508" y="174" text-anchor="end">5 steps · 2 handoffs · 5 tools</text></g>
+  { name: "Explore", stage: "Discover", title: "Explore the library", text: "Printable resources across history, science, math, the seasons and the wider world.", visual: `<svg viewBox="0 0 520 180" class="hfl-svg" aria-hidden="true">
+  ${["History", "Science", "Math", "Seasons", "Geography", "Nature", "Holidays", "Cultures"]
+    .map((label, i) => {
+      const x = 12 + (i % 4) * 126;
+      const y = i < 4 ? 4 : 94;
+      const free = i === 1 || i === 6;
+      return `<g class="fi" style="--d:${i * 90}ms"><rect class="card" x="${x}" y="${y}" width="114" height="80" rx="10"/><rect class="band" x="${x}" y="${y}" width="114" height="32" rx="10"/><rect class="band" x="${x}" y="${y + 16}" width="114" height="16"/><text class="t t--sm t--b" x="${x + 12}" y="${y + 54}">${label}</text><rect class="lane" x="${x + 12}" y="${y + 63}" width="64" height="6" rx="3"/>${free ? `<g class="pop" style="--d:${900 + i * 60}ms"><rect class="node node--brass" x="${x + 66}" y="${y + 8}" width="40" height="17" rx="8.5"/><text class="t t--xs t--brass t--b" x="${x + 86}" y="${y + 20}" text-anchor="middle">Free</text></g>` : ""}</g>`;
+    })
+    .join("")}
 </svg>` },
-  { name: "Identify", stage: "Understand & Identify", title: "We identify AI opportunities", text: "Where AI genuinely helps, and where it doesn’t belong.", visual: `<svg viewBox="0 0 520 180" class="nbf-svg" aria-hidden="true"><g class="fi hit" style="--d:0ms"><rect class="tile" x="20" y="16" width="108" height="28" rx="14"/><text class="t t--sm" x="34" y="34">Proposals</text><text class="spark" x="112" y="34" text-anchor="middle">✦</text></g><g class="fi hit" style="--d:60ms"><rect class="tile" x="144" y="16" width="108" height="28" rx="14"/><text class="t t--sm" x="158" y="34">Reporting</text><text class="spark" x="236" y="34" text-anchor="middle">✦</text></g><g class="fi" style="--d:120ms"><rect class="tile" x="268" y="16" width="108" height="28" rx="14"/><text class="t t--sm" x="282" y="34">Client calls</text></g><g class="fi" style="--d:180ms"><rect class="tile" x="392" y="16" width="108" height="28" rx="14"/><text class="t t--sm" x="406" y="34">Scheduling</text></g><g class="fi hit" style="--d:240ms"><rect class="tile" x="20" y="60" width="108" height="28" rx="14"/><text class="t t--sm" x="34" y="78">Follow-ups</text><text class="spark" x="112" y="78" text-anchor="middle">✦</text></g><g class="fi" style="--d:300ms"><rect class="tile" x="144" y="60" width="108" height="28" rx="14"/><text class="t t--sm" x="158" y="78">Pricing</text></g><g class="fi hit" style="--d:360ms"><rect class="tile" x="268" y="60" width="108" height="28" rx="14"/><text class="t t--sm" x="282" y="78">Data entry</text><text class="spark" x="360" y="78" text-anchor="middle">✦</text></g><g class="fi" style="--d:420ms"><rect class="tile" x="392" y="60" width="108" height="28" rx="14"/><text class="t t--sm" x="406" y="78">Invoices</text></g><g class="fi hit" style="--d:480ms"><rect class="tile" x="20" y="104" width="108" height="28" rx="14"/><text class="t t--sm" x="34" y="122">Research</text><text class="spark" x="112" y="122" text-anchor="middle">✦</text></g><g class="fi" style="--d:540ms"><rect class="tile" x="144" y="104" width="108" height="28" rx="14"/><text class="t t--sm" x="158" y="122">Hiring</text></g><g class="fi hit" style="--d:600ms"><rect class="tile" x="268" y="104" width="108" height="28" rx="14"/><text class="t t--sm" x="282" y="122">Intake</text><text class="spark" x="360" y="122" text-anchor="middle">✦</text></g><g class="fi" style="--d:660ms"><rect class="tile" x="392" y="104" width="108" height="28" rx="14"/><text class="t t--sm" x="406" y="122">Strategy</text></g><g class="fi" style="--d:1300ms"><text class="spark spark--on" x="20" y="172">✦</text><text class="t t--muted" x="36" y="172">AI opportunity</text></g></svg>` },
-  { name: "Design", stage: "Design & Implement", title: "We design the plan", text: "Priorities, approach and tools, agreed with you before anything is built.", visual: `<svg viewBox="0 0 520 180" class="nbf-svg" aria-hidden="true">
-  <rect class="card" x="10" y="4" width="500" height="170" rx="12"/>
-  <text class="t t--b" x="34" y="36">AI plan</text>
-  <g class="fi" style="--d:200ms"><rect class="pill-draft" x="404" y="20" width="84" height="24" rx="12"/><text class="t t--sm pill-draft__t" x="446" y="36" text-anchor="middle">Draft</text><text class="t t--sm pill-ok__t" x="446" y="36" text-anchor="middle">Agreed ✓</text></g>
-  <line class="rule" x1="34" y1="54" x2="488" y2="54"/>
-  <g class="fi" style="--d:300ms"><circle class="num" cx="46" cy="80" r="11"/><text class="t t--sm t--brass" x="46" y="84" text-anchor="middle">1</text><text class="t" x="68" y="85">Start with the clearest win</text></g>
-  <g class="fi" style="--d:450ms"><circle class="num" cx="46" cy="114" r="11"/><text class="t t--sm t--brass" x="46" y="118" text-anchor="middle">2</text><text class="t" x="68" y="119">Choose approach and tools</text></g>
-  <g class="fi" style="--d:600ms"><circle class="num" cx="46" cy="148" r="11"/><text class="t t--sm t--brass" x="46" y="152" text-anchor="middle">3</text><text class="t" x="68" y="153">Agree scope and timing</text></g>
-  <rect class="lane" x="300" y="72" width="188" height="16" rx="8"/><rect class="lane" x="300" y="106" width="188" height="16" rx="8"/><rect class="lane" x="300" y="140" width="188" height="16" rx="8"/>
-  <rect class="bar" x="300" y="72" width="80" height="16" rx="8" style="--d:500ms"/>
-  <rect class="bar" x="360" y="106" width="88" height="16" rx="8" style="--d:700ms"/>
-  <rect class="bar" x="420" y="140" width="68" height="16" rx="8" style="--d:900ms"/>
+  { name: "Find", stage: "Discover", title: "Find the right resource", text: "Browse by age, subject, season or theme.", visual: `<svg viewBox="0 0 520 180" class="hfl-svg" aria-hidden="true">
+  ${[
+    { label: "Age", chips: ["3–5", "5–7", "7–10"], on: 1 },
+    { label: "Subject", chips: ["History", "Science", "Math"], on: 1 },
+    { label: "Season", chips: ["Autumn", "Winter", "Spring"], on: 0 },
+  ]
+    .map((row, r) => {
+      const y = 12 + r * 56;
+      return `<g class="fi" style="--d:${r * 160}ms"><text class="t t--sm t--muted lane-label" x="12" y="${y + 21}">${row.label}</text>${row.chips
+        .map((chip, c) => {
+          const x = 120 + c * 132;
+          const hit = c === row.on ? " hit" : "";
+          return `<g class="chip${hit}" style="--d:${700 + r * 250}ms"><rect class="tile" x="${x}" y="${y}" width="120" height="30" rx="15"/><text class="t t--sm" x="${x + 60}" y="${y + 19.5}" text-anchor="middle">${chip}</text></g>`;
+        })
+        .join("")}</g>`;
+    })
+    .join("")}
 </svg>` },
-  { name: "Implement", stage: "Design & Implement", title: "We implement it", text: "Built into the systems and workflows your team already uses.", visual: `<svg viewBox="0 0 520 180" class="nbf-svg" aria-hidden="true">
-  <path class="flow" d="M130 41 C165 41 165 90 200 90"/><path class="flow" d="M130 90 L200 90"/><path class="flow" d="M130 139 C165 139 165 90 200 90"/><path class="flow" d="M320 90 L390 90"/>
-  <g class="fi"><rect class="node" x="20" y="24" width="110" height="34" rx="8"/><text class="t" x="75" y="46" text-anchor="middle">CRM</text></g>
-  <g class="fi" style="--d:120ms"><rect class="node" x="20" y="73" width="110" height="34" rx="8"/><text class="t" x="75" y="95" text-anchor="middle">Email</text></g>
-  <g class="fi" style="--d:240ms"><rect class="node" x="20" y="122" width="110" height="34" rx="8"/><text class="t" x="75" y="144" text-anchor="middle">Docs</text></g>
-  <g class="fi" style="--d:450ms"><rect class="node node--brass" x="200" y="52" width="120" height="76" rx="12"/><text class="spark spark--on" x="260" y="84" text-anchor="middle" style="font-size:18px">✦</text><text class="t t--brass t--b" x="260" y="108" text-anchor="middle">AI workflow</text></g>
-  <g class="fi" style="--d:650ms"><rect class="node" x="390" y="52" width="110" height="76" rx="12"/>
-    <circle class="person" cx="425" cy="78" r="7"/><path class="person" d="M413 98 q12 -12 24 0"/>
-    <circle class="person" cx="465" cy="78" r="7"/><path class="person" d="M453 98 q12 -12 24 0"/>
-    <text class="t" x="445" y="116" text-anchor="middle">Your team</text></g>
-  <g class="fi" style="--d:900ms"><text class="t t--muted t--sm" x="75" y="174" text-anchor="middle">Your systems</text><text class="t t--muted t--sm" x="445" y="152" text-anchor="middle">Reviews and uses it</text></g>
+  { name: "Choose", stage: "Get", title: "Download free, or buy", text: "Free resources need only an email address. Resources and collections can be bought and downloaded.", visual: `<svg viewBox="0 0 520 180" class="hfl-svg" aria-hidden="true">
+  <g class="fi"><rect class="card" x="10" y="4" width="240" height="168" rx="12"/>
+    <text class="t t--sm t--muted lane-label" x="30" y="32">Free resource</text>
+    <text class="t t--b" x="30" y="70" style="font-size:22px">Free</text>
+    <text class="t t--sm t--muted" x="30" y="96">Email address required</text>
+    <g class="pop" style="--d:600ms"><rect class="node node--brass" x="30" y="122" width="140" height="32" rx="16"/><text class="t t--sm t--brass t--b" x="100" y="142" text-anchor="middle">Download free</text></g></g>
+  <g class="fi" style="--d:250ms"><rect class="card" x="270" y="4" width="240" height="168" rx="12"/>
+    <text class="t t--sm t--muted lane-label" x="290" y="32">Resource or collection</text>
+    <text class="t t--b" x="290" y="70" style="font-size:22px">Paid</text>
+    <text class="t t--sm t--muted" x="290" y="96">Price shown on each page</text>
+    <g class="pop" style="--d:850ms"><rect class="node node--ink" x="290" y="122" width="160" height="32" rx="16"/><text class="t t--sm t--b t--inv" x="370" y="142" text-anchor="middle">Buy and download</text></g></g>
 </svg>` },
-  { name: "Optimize", stage: "Measure & Optimize", title: "We measure, optimize, repeat", text: "Track what works, improve it, then move to the next opportunity.", visual: `<svg viewBox="0 0 520 180" class="nbf-svg" aria-hidden="true">
-  <circle class="loop" cx="120" cy="92" r="62"/>
-  <text class="spark spark--on" x="120" y="100" text-anchor="middle" style="font-size:24px">↻</text>
-  <g class="fi"><rect class="node node--brass" x="80" y="16" width="80" height="28" rx="14"/><text class="t t--brass t--sm t--b" x="120" y="34" text-anchor="middle">Measure</text></g>
-  <g class="fi" style="--d:250ms"><rect class="node node--brass" x="140" y="132" width="84" height="28" rx="14"/><text class="t t--brass t--sm t--b" x="182" y="150" text-anchor="middle">Optimize</text></g>
-  <g class="fi" style="--d:500ms"><rect class="node node--brass" x="16" y="132" width="76" height="28" rx="14"/><text class="t t--brass t--sm t--b" x="54" y="150" text-anchor="middle">Repeat</text></g>
-  <g class="fi" style="--d:200ms"><rect class="card" x="262" y="12" width="246" height="156" rx="12"/>
-    <line class="rule" x1="282" y1="140" x2="488" y2="140"/><line class="rule rule--dash" x1="282" y1="100" x2="488" y2="100"/><line class="rule rule--dash" x1="282" y1="60" x2="488" y2="60"/>
-    <text class="t t--sm t--muted" x="282" y="34">What’s working</text></g>
-  <path class="draw draw--line" pathLength="1" d="M286 132 L318 122 L350 126 L382 104 L414 98 L446 76 L480 58" style="--d:500ms"/>
-  <g class="fi" style="--d:1300ms"><circle class="dot" cx="480" cy="58" r="4.5"/></g>
+  { name: "Receive", stage: "Get", title: "Receive the PDF", text: "By email, or through the download after checkout.", visual: `<svg viewBox="0 0 520 180" class="hfl-svg" aria-hidden="true">
+  <path class="flow" d="M180 90 L330 90"/>
+  <g class="fi"><rect class="node" x="40" y="44" width="140" height="92" rx="10"/><path class="line" d="M40 50 L110 100 L180 50"/><text class="t t--sm t--muted" x="110" y="164" text-anchor="middle">Email</text></g>
+  <g class="fi" style="--d:200ms"><text class="t t--sm t--muted" x="255" y="78" text-anchor="middle">or</text></g>
+  <g class="fi" style="--d:450ms"><path class="doc" d="M350 26 L430 26 L460 56 L460 154 L350 154 Z"/><path class="line" d="M430 26 L430 56 L460 56"/>
+    <rect class="node node--brass" x="368" y="94" width="56" height="26" rx="6"/><text class="t t--sm t--brass t--b" x="396" y="112" text-anchor="middle">PDF</text>
+    <text class="t t--sm t--muted" x="405" y="176" text-anchor="middle">Download</text></g>
+</svg>` },
+  { name: "Enjoy", stage: "Use", title: "Print, explore and enjoy together", text: "Activities, observation and conversation that carry on beyond the page.", visual: `<svg viewBox="0 0 520 180" class="hfl-svg" aria-hidden="true">
+  <path class="draw" pathLength="1" d="M150 76 L200 76" style="--d:500ms"/>
+  <path class="draw" pathLength="1" d="M320 76 L370 76" style="--d:900ms"/>
+  <g class="fi"><rect class="node node--brass" x="30" y="16" width="120" height="120" rx="14"/>
+    <path class="doc" d="M70 40 L104 40 L116 52 L116 112 L70 112 Z"/><rect class="lane" x="78" y="62" width="28" height="5" rx="2.5"/><rect class="lane" x="78" y="74" width="22" height="5" rx="2.5"/><rect class="lane" x="78" y="86" width="28" height="5" rx="2.5"/>
+    <text class="t t--brass t--b" x="90" y="164" text-anchor="middle">Print</text></g>
+  <g class="fi" style="--d:350ms"><rect class="node node--brass" x="200" y="16" width="120" height="120" rx="14"/>
+    <circle class="line" cx="252" cy="70" r="20"/><path class="line" d="M266 84 L284 102"/>
+    <text class="t t--brass t--b" x="260" y="164" text-anchor="middle">Explore</text></g>
+  <g class="fi" style="--d:750ms"><rect class="node node--brass" x="370" y="16" width="120" height="120" rx="14"/>
+    <circle class="person" cx="412" cy="62" r="11"/><path class="person" d="M394 100 q18 -22 36 0"/>
+    <circle class="person" cx="452" cy="70" r="8"/><path class="person" d="M439 100 q13 -16 26 0"/>
+    <text class="t t--brass t--b" x="430" y="164" text-anchor="middle">Discover together</text></g>
 </svg>` },
 ];
 ---
 
-<div class="nbf" data-nbf role="region" aria-roledescription="carousel" aria-label="How No Black Swan works, in five steps">
-  <div class="nbf__frame">
+<div class="hfl" data-hfl role="region" aria-roledescription="carousel" aria-label="How The Home School Barn works, in five steps">
+  <div class="hfl__frame">
     {
       STEPS.map((s, i) => (
-        <div class="nbf__slide" data-slide={i} aria-hidden={i === 0 ? "false" : "true"}>
-          <p class="nbf__label">Step {i + 1} of {STEPS.length} · {s.stage}</p>
-          <h3 class="nbf__title">{s.title}</h3>
-          <p class="nbf__text">{s.text}</p>
+        <div class="hfl__slide" data-slide={i} aria-hidden={i === 0 ? "false" : "true"}>
+          <p class="hfl__label">Step {i + 1} of {STEPS.length} · {s.stage}</p>
+          <h3 class="hfl__title">{s.title}</h3>
+          <p class="hfl__text">{s.text}</p>
           <Fragment set:html={s.visual} />
         </div>
       ))
     }
   </div>
-  <div class="nbf__rail">
+  <div class="hfl__rail">
     {
       STEPS.map((s, i) => (
-        <button type="button" class="nbf__step" data-step={i} aria-label={`Step ${i + 1}: ${s.title}`}>
-          <span class="nbf__bar"><i /></span>
-          <span class="nbf__name">{s.name}</span>
+        <button type="button" class="hfl__step" data-step={i} aria-label={`Step ${i + 1}: ${s.title}`}>
+          <span class="hfl__bar"><i /></span>
+          <span class="hfl__name">{s.name}</span>
         </button>
       ))
     }
   </div>
-  <div class="nbf__foot">
-    <button class="nbf__btn" data-toggle type="button">Pause</button>
+  <div class="hfl__foot">
+    <button class="hfl__btn" data-toggle type="button">Pause</button>
   </div>
 </div>
 
 <style is:global>
-  .nbf {
+  .hfl {
     --ink: #1a1a2e; --surface: #ffffff; --border: #e4e2de; --muted: #5c5c5c;
     --brass: #b5935a; --brass-text: #7a5c28; --brass-tint: #f3ece0; --tint: #f3f1ec;
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
     width: 100%;
   }
-  .nbf__frame {
+  .hfl__frame {
     position: relative; display: grid;
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
     box-shadow: 0 1px 2px rgba(26, 26, 46, 0.04), 0 12px 32px -18px rgba(26, 26, 46, 0.18);
     overflow: hidden;
   }
   /* All slides share one grid cell, so the frame keeps the tallest height. */
-  .nbf__slide {
-    grid-area: 1 / 1; padding: 28px 28px 28px;
+  .hfl__slide {
+    grid-area: 1 / 1; padding: 28px;
     opacity: 0; transform: translateY(8px); visibility: hidden;
     transition: opacity 500ms var(--ease), transform 500ms var(--ease), visibility 0s 500ms;
   }
-  .nbf__slide.is-active { opacity: 1; transform: none; visibility: visible; transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
-  .nbf__label { margin: 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass-text); }
-  .nbf__title { margin: 12px 0 0; font-size: 24px; line-height: 1.2; font-weight: 500; color: var(--ink); }
-  .nbf__text { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: 40ch; }
+  .hfl__slide.is-active { opacity: 1; transform: none; visibility: visible; transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+  .hfl__label { margin: 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass-text); }
+  .hfl__title { margin: 12px 0 0; font-size: 24px; line-height: 1.2; font-weight: 500; color: var(--ink); }
+  .hfl__text { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: 42ch; }
 
-  /* Stage illustrations (inline SVG). Items fade/draw in once the slide is active. */
-  .nbf-svg { display: block; width: 100%; height: auto; margin-top: 24px; overflow: visible; }
-  .nbf-svg .t { font-family: inherit; font-size: 13px; fill: var(--ink); }
-  .nbf-svg .t--sm { font-size: 11.5px; }
-  .nbf-svg .t--b { font-weight: 500; }
-  .nbf-svg .t--brass { fill: var(--brass-text); }
-  .nbf-svg .t--muted { fill: var(--muted); }
-  .nbf-svg .node { fill: var(--tint); stroke: var(--border); }
-  .nbf-svg .node--brass { fill: var(--brass-tint); stroke: var(--brass); }
-  .nbf-svg .card { fill: #fdfcfa; stroke: var(--border); }
-  .nbf-svg .rule { stroke: var(--border); }
-  .nbf-svg .rule--dash { stroke-dasharray: 3 4; }
-  .nbf-svg .num { fill: var(--surface); stroke: var(--brass); }
-  .nbf-svg .lane { fill: var(--tint); }
-  .nbf-svg .person { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-linecap: round; }
-  .nbf-svg .dot { fill: var(--brass); }
-  .nbf-svg .spark { fill: transparent; font-size: 13px; transition: fill 400ms var(--ease) 1000ms; }
-  .nbf-svg .spark--on { fill: var(--brass); }
+  /* Step illustrations (inline SVG). Items fade/draw in once the slide is active. */
+  .hfl-svg { display: block; width: 100%; height: auto; margin-top: 24px; overflow: visible; }
+  .hfl-svg .t { font-family: inherit; font-size: 13px; fill: var(--ink); }
+  .hfl-svg .t--sm { font-size: 11.5px; }
+  .hfl-svg .t--xs { font-size: 10px; }
+  .hfl-svg .t--b { font-weight: 500; }
+  .hfl-svg .t--brass { fill: var(--brass-text); }
+  .hfl-svg .t--muted { fill: var(--muted); }
+  .hfl-svg .t--inv { fill: var(--surface); }
+  .hfl-svg .lane-label { letter-spacing: 0.06em; text-transform: uppercase; font-size: 10px; }
+  .hfl-svg .node { fill: var(--tint); stroke: var(--border); }
+  .hfl-svg .node--brass { fill: var(--brass-tint); stroke: var(--brass); }
+  .hfl-svg .node--ink { fill: var(--ink); stroke: var(--ink); }
+  .hfl-svg .card { fill: #fdfcfa; stroke: var(--border); }
+  .hfl-svg .band { fill: var(--tint); }
+  .hfl-svg .lane { fill: #e9e6e0; }
+  .hfl-svg .doc { fill: var(--surface); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
+  .hfl-svg .line { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .hfl-svg .person { fill: none; stroke: var(--brass-text); stroke-width: 1.6; stroke-linecap: round; }
 
-  .nbf-svg .fi { opacity: 0; transition: opacity 500ms var(--ease) var(--d, 0ms); }
-  .nbf__slide.is-active .fi { opacity: 1; }
-  .nbf-svg .draw { fill: none; stroke: var(--brass); stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--ease) var(--d, 0ms); }
-  .nbf-svg .draw--line { stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition-duration: 1200ms; }
-  .nbf__slide.is-active .draw { stroke-dashoffset: 0; }
+  .hfl-svg .fi { opacity: 0; transition: opacity 500ms var(--ease) var(--d, 0ms); }
+  .hfl__slide.is-active .fi { opacity: 1; }
+  .hfl-svg .pop { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.6); transition: opacity 300ms var(--ease) var(--d, 0ms), transform 400ms var(--ease) var(--d, 0ms); }
+  .hfl__slide.is-active .pop { opacity: 1; transform: none; }
+  .hfl-svg .draw { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 700ms var(--ease) var(--d, 0ms); }
+  .hfl__slide.is-active .draw { stroke-dashoffset: 0; }
 
-  .nbf-svg .t--xs { font-size: 10.5px; }
-  /* Understand: work traced across teams. */
-  .nbf-svg .lane-band { fill: #faf8f4; }
-  .nbf-svg .lane-label { letter-spacing: 0.06em; text-transform: uppercase; font-size: 10px; }
-  .nbf-svg .handoff { fill: var(--surface); stroke: var(--brass); stroke-width: 1.6; }
-  .nbf-svg .pop { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.4); transition: opacity 300ms var(--ease) var(--d, 0ms), transform 400ms var(--ease) var(--d, 0ms); }
-  .nbf__slide.is-active .pop { opacity: 1; transform: none; }
-  /* Identify: opportunities light up after the grid appears. */
-  .nbf-svg .tile { fill: var(--surface); stroke: var(--border); transition: fill 400ms var(--ease), stroke 400ms var(--ease); }
-  .nbf-svg .hit .tile { transition-delay: 1000ms; }
-  .nbf__slide.is-active .hit .tile { fill: var(--brass-tint); stroke: var(--brass); }
-  .nbf__slide.is-active .hit .spark { fill: var(--brass); }
+  /* Find: the chosen filter in each row lights up. */
+  .hfl-svg .tile { fill: var(--surface); stroke: var(--border); transition: fill 400ms var(--ease) var(--d, 0ms), stroke 400ms var(--ease) var(--d, 0ms); }
+  .hfl__slide.is-active .hit .tile { fill: var(--brass-tint); stroke: var(--brass); }
 
-
-  /* Design: bars grow, Draft becomes Agreed. */
-  .nbf-svg .bar { fill: var(--brass); transform-box: fill-box; transform-origin: left center; transform: scaleX(0); transition: transform 700ms var(--ease) var(--d, 0ms); }
-  .nbf__slide.is-active .bar { transform: scaleX(1); }
-  .nbf-svg .pill-draft { fill: var(--surface); stroke: var(--border); transition: fill 400ms var(--ease) 1500ms, stroke 400ms var(--ease) 1500ms; }
-  .nbf-svg .pill-draft__t { fill: var(--muted); transition: opacity 300ms var(--ease) 1500ms; }
-  .nbf-svg .pill-ok__t { fill: #2f6b4f; opacity: 0; transition: opacity 300ms var(--ease) 1500ms; }
-  .nbf__slide.is-active .pill-draft { fill: #e4efe8; stroke: #2f6b4f; }
-  .nbf__slide.is-active .pill-draft__t { opacity: 0; }
-  .nbf__slide.is-active .pill-ok__t { opacity: 1; }
-
-  /* Implement: data flows along the connectors. */
-  .nbf-svg .flow { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-dasharray: 4 6; animation: nbf-flow 900ms linear infinite; animation-play-state: paused; }
-  .nbf__slide.is-active .flow { animation-play-state: running; }
-  @keyframes nbf-flow { to { stroke-dashoffset: -20; } }
-
-  /* Optimize: the loop turns. */
-  .nbf-svg .loop { fill: none; stroke: var(--brass); stroke-width: 1.4; stroke-dasharray: 6 7; transform-box: fill-box; transform-origin: center; animation: nbf-spin 14s linear infinite; animation-play-state: paused; }
-  .nbf__slide.is-active .loop { animation-play-state: running; }
-  @keyframes nbf-spin { to { transform: rotate(360deg); } }
+  /* Receive: the file travels along the connector. */
+  .hfl-svg .flow { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-dasharray: 4 6; animation: hfl-flow 900ms linear infinite; animation-play-state: paused; }
+  .hfl__slide.is-active .flow { animation-play-state: running; }
+  @keyframes hfl-flow { to { stroke-dashoffset: -20; } }
 
   /* Rail */
-  .nbf__rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
-  .nbf__step { appearance: none; border: 0; background: none; padding: 0; text-align: left; cursor: pointer; font: inherit; color: var(--muted); }
-  .nbf__bar { display: block; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
-  .nbf__bar i { display: block; height: 100%; width: 0; background: var(--brass); }
-  .nbf__step.is-done .nbf__bar i { width: 100%; }
-  .nbf__step.is-active .nbf__bar i { animation: nbf-fill linear forwards; animation-duration: var(--dur, 2500ms); }
-  .nbf.is-paused .nbf__step.is-active .nbf__bar i { animation-play-state: paused; }
-  .nbf__name { display: block; font-size: 12px; margin-top: 8px; white-space: nowrap; }
-  .nbf__step.is-active .nbf__name { color: var(--ink); }
-  .nbf__step:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; border-radius: 2px; }
-  @keyframes nbf-fill { from { width: 0; } to { width: 100%; } }
-  .nbf__foot { display: flex; justify-content: flex-end; margin-top: 12px; }
-  .nbf__btn { appearance: none; border: 1px solid var(--border); background: var(--surface); border-radius: 15px; padding: 4px 12px; font: inherit; font-size: 12px; color: var(--ink); cursor: pointer; }
+  .hfl__rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+  .hfl__step { appearance: none; border: 0; background: none; padding: 0; text-align: left; cursor: pointer; font: inherit; color: var(--muted); }
+  .hfl__bar { display: block; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+  .hfl__bar i { display: block; height: 100%; width: 0; background: var(--brass); }
+  .hfl__step.is-done .hfl__bar i { width: 100%; }
+  .hfl__step.is-active .hfl__bar i { animation: hfl-fill linear forwards; animation-duration: var(--dur, 3000ms); }
+  .hfl.is-paused .hfl__step.is-active .hfl__bar i { animation-play-state: paused; }
+  .hfl__name { display: block; font-size: 12px; margin-top: 8px; white-space: nowrap; }
+  .hfl__step.is-active .hfl__name { color: var(--ink); }
+  .hfl__step:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; border-radius: 2px; }
+  @keyframes hfl-fill { from { width: 0; } to { width: 100%; } }
+  .hfl__foot { display: flex; justify-content: flex-end; margin-top: 12px; }
+  .hfl__btn { appearance: none; border: 1px solid var(--border); background: var(--surface); border-radius: 15px; padding: 4px 12px; font: inherit; font-size: 12px; color: var(--ink); cursor: pointer; }
 
   @media (max-width: 480px) {
-    .nbf__slide { padding: 24px 22px 28px; }
-    .nbf__title { font-size: 22px; }
-    .nbf__name { font-size: 11px; }
+    .hfl__slide { padding: 24px 22px 28px; }
+    .hfl__title { font-size: 22px; }
+    .hfl__name { font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .nbf__slide, .nbf-svg * { transition: none !important; animation: none !important; }
-    .nbf__step.is-active .nbf__bar i { animation: none; width: 100%; }
+    .hfl__slide, .hfl-svg * { transition: none !important; animation: none !important; }
+    .hfl__step.is-active .hfl__bar i { animation: none; width: 100%; }
   }
 </style>
 
 <script>
-  const DURATION = 2500;
-  document.querySelectorAll<HTMLElement>("[data-nbf]").forEach((root) => {
+  const DURATION = 3000;
+  document.querySelectorAll<HTMLElement>("[data-hfl]").forEach((root) => {
     const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));
     const steps = Array.from(root.querySelectorAll<HTMLElement>("[data-step]"));
     const toggle = root.querySelector<HTMLButtonElement>("[data-toggle]")!;
@@ -241,6 +225,8 @@ const STEPS = [
     steps.forEach((b, j) => b.addEventListener("click", () => go(j)));
     root.addEventListener("mouseenter", pause);
     root.addEventListener("mouseleave", resume);
+    root.addEventListener("focusin", pause);
+    root.addEventListener("focusout", resume);
     toggle.addEventListener("click", () => {
       userPaused = !userPaused;
       toggle.textContent = userPaused ? "Play" : "Pause";

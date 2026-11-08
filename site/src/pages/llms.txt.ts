@@ -2,12 +2,15 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { generateLlmsTxt } from "seo-core";
 import { ARTICLES_BASE, AUTHOR_PATH, SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "../config/site";
+import { getPublishedCollections, getPublishedResources } from "../lib/resources";
 
 export const GET: APIRoute = async () => {
   const articles = (await getCollection("articles", ({ data }) => data.draft !== true)).sort(
     (a, b) => (b.data.updatedDate || b.data.date).localeCompare(a.data.updatedDate || a.data.date),
   );
   const team = await getCollection("team");
+  const resources = await getPublishedResources();
+  const collections = await getPublishedCollections();
 
   const body = generateLlmsTxt({
     siteUrl: SITE_URL,
@@ -18,11 +21,20 @@ export const GET: APIRoute = async () => {
     team,
     authorPath: AUTHOR_PATH,
     extraPages: [
-      { path: "/services/", title: "Services", description: "AI integration services: assess the business, find where AI fits, then build, connect and refine it in real workflows." },
-      { path: "/how-it-works/", title: "How it works", description: "The process in three stages: understand the business and identify AI opportunities, design and implement, then measure and optimize month to month." },
-      { path: "/pricing/", title: "Pricing", description: "Setup and assessment from $250 for the first month; ongoing engagement typically from $2,000 a month, scaled to project size and pace. Exact scope and fee agreed after a free 30-minute call." },
-      { path: "/about/", title: "About", description: "No Black Swan is a small AI integration agency run by founder Dori Fussmann, an entrepreneur, fractional CFO and operator." },
-      { path: "/book-call/", title: "Book a free consultation", description: "A free 30-minute call with Dori: we tell you what we would do for your business." },
+      { path: "/resources/", title: "Resource library", description: "Printable learning resources (PDFs) for children aged roughly 3 to 10, free and paid, across history, science, math, the seasons and geography. Free resources need an email address." },
+      ...resources.map((r) => ({
+        path: `/resources/${r.id}/`,
+        title: r.data.title,
+        description: `${r.data.free ? "Free" : r.data.price ?? "Paid"} printable resource${r.data.ages ? `, ${r.data.ages}` : ""}. ${r.data.summary}`,
+      })),
+      { path: "/collections/", title: "Collections", description: "Curated sets of printable resources gathered around a season, subject or theme." },
+      ...collections.map((c) => ({
+        path: `/collections/${c.id}/`,
+        title: c.data.title,
+        description: `Collection${c.data.price ? `, ${c.data.price}` : ""}. ${c.data.summary}`,
+      })),
+      { path: "/about/", title: "About", description: "An independent resource brand: not a curriculum, not tied to one educational method, and not a personal influencer brand. Resources stand alone and free ones are made with the same care as paid ones." },
+      { path: "/download-policy/", title: "Downloads and refunds", description: "What you receive (digital PDF files, nothing shipped), delivery, downloading again, printing and refunds." },
     ],
   });
 
