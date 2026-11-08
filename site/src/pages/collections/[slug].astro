@@ -1,0 +1,119 @@
+---
+/** Page for one curated collection (bundle). Built only for published files in src/content/collections/. */
+import { Image, getImage } from "astro:assets";
+import { render } from "astro:content";
+import { orgId } from "seo-core";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import ResourceCard from "../../components/ResourceCard.astro";
+import { SITE_URL } from "../../config/site";
+import { getPublishedCollections, resourcesIn, schemaCurrency, schemaPrice, type ResourceCollection } from "../../lib/resources";
+import { absoluteFileUrl, absoluteUrl, sitePath } from "../../lib/url";
+
+export async function getStaticPaths() {
+  const collections = await getPublishedCollections();
+  return collections.map((collection) => ({ params: { slug: collection.id }, props: { collection } }));
+}
+
+const { collection } = Astro.props as { collection: ResourceCollection };
+const { data } = collection;
+const { Content } = await render(collection);
+const items = await resourcesIn(collection);
+const path = `/collections/${collection.id}/`;
+
+const coverImage = data.cover ? await getImage({ src: data.cover, width: 1200 }) : undefined;
+const price = schemaPrice(data.price);
+const jsonLd: Record<string, unknown>[] = [
+  {
+    "@type": "Product",
+    name: data.title,
+    description: data.summary,
+    url: absoluteUrl(path),
+    brand: { "@id": orgId(SITE_URL) },
+    category: "Collection of printable educational resources",
+    ...(coverImage ? { image: absoluteFileUrl(coverImage.src) } : {}),
+    ...(price
+      ? {
+          offers: {
+            "@type": "Offer",
+            price,
+            priceCurrency: schemaCurrency(data.price),
+            availability: "https://schema.org/InStock",
+            url: absoluteUrl(path),
+          },
+        }
+      : {}),
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+      { "@type": "ListItem", position: 2, name: "Collections", item: absoluteUrl("/collections/") },
+      { "@type": "ListItem", position: 3, name: data.title, item: absoluteUrl(path) },
+    ],
+  },
+];
+---
+
+<BaseLayout title={data.seoTitle} description={data.seoDescription} canonicalPath={path} jsonLd={jsonLd} ogImage={coverImage?.src}>
+  <main id="main-content" class="site-wrap flex-1 py-xl lg:py-2xl">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Collections", href: "/collections/" }, { label: data.title }]} />
+    <div class="grid gap-2xl mt-lg lg:grid-cols-12 lg:gap-x-xl">
+      <div class="lg:col-span-7">
+        <p class="type-label">Collection{data.ages ? ` · ${data.ages}` : ""}</p>
+        <h1 class="type-h1 mt-md">{data.title}</h1>
+        <p class="type-body-lg mt-md max-w-prose">{data.summary}</p>
+        {data.cover && (
+          <div class="media-frame mt-xl">
+            <Image src={data.cover} alt={data.coverAlt ?? ""} widths={[640, 960, 1200]} sizes="(min-width: 1024px) 55vw, 92vw" loading="eager" />
+          </div>
+        )}
+        <div class="article-body mt-xl">
+          <Content />
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="lead-form resource-action">
+          <p class="type-label">{data.price ?? "Price to be announced"}</p>
+          {data.buyUrl ? (
+            <p class="mt-lg">
+              <a class="btn-primary" href={data.buyUrl} rel="noopener">Buy and Download</a>
+            </p>
+          ) : (
+            <p class="type-body mt-md">This collection will be available to buy soon.</p>
+          )}
+        </div>
+        <p class="type-body-sm mt-md">
+          See <a href={sitePath("/download-policy/")}>downloads and refunds</a>.
+        </p>
+      </aside>
+    </div>
+
+    {items.length > 0 && (
+      <section class="section-block rule mt-2xl" aria-labelledby="in-collection">
+        <h2 id="in-collection" class="type-h2">In this collection</h2>
+        <ul class="article-grid mt-xl">
+          {items.map((resource) => (
+            <li>
+              <article>
+                <ResourceCard
+                  href={`/resources/${resource.id}/`}
+                  title={resource.data.title}
+                  summary={resource.data.summary}
+                  free={resource.data.free}
+                  price={resource.data.price}
+                  ages={resource.data.ages}
+                  cover={resource.data.cover}
+                  coverAlt={resource.data.coverAlt}
+                  headingLevel="h3"
+                />
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </main>
+  <CtaBanner />
+</BaseLayout>
