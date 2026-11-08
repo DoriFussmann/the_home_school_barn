@@ -2785,7 +2785,7 @@
   }
 }
 
-/* Resource library (The Home School Barn): tiles, badges, forms, product facts. */
+/* Resource library (The Homeschool Barn): tiles, badges, forms, product facts. */
 @layer components {
   .resource-tile__cover {
     aspect-ratio: 4 / 3;

@@ -5,9 +5,9 @@
 
 ## 1. Who We Are
 
-The Home School Barn is an independent publisher of printable educational resources for children, sold and offered for free to parents and educators at https://thehomeschoolbarn.com/.
+The Homeschool Barn is an independent publisher of printable educational resources for children, sold and offered for free to parents and educators at https://thehomeschoolbarn.com/.
 
-This Privacy Policy explains how [OPEN: legal entity name] ("The Home School Barn," "we," "us," or "our") collects, uses, shares and protects personal information when you visit the website, download a free resource, buy a resource, or join the newsletter.
+This Privacy Policy explains how [OPEN: legal entity name] ("The Homeschool Barn," "we," "us," or "our") collects, uses, shares and protects personal information when you visit the website, download a free resource, buy a resource, or join the newsletter.
 
 **Business address:** [OPEN: business address]  
 **Privacy contact:** [OPEN: contact email]

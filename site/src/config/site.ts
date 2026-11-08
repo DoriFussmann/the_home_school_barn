@@ -5,14 +5,14 @@ import type { AuthorPath, SiteIdentity } from "seo-core";
  * OPEN (intake): confirm www vs non-www before launch.
  */
 export const SITE_URL = "https://thehomeschoolbarn.com";
-export const SITE_NAME = "The Home School Barn";
+export const SITE_NAME = "The Homeschool Barn";
 
 /** Short brand tagline (brand promise). Shown in the footer and hero. */
 export const SITE_TAGLINE = "Beautifully crafted learning experiences for curious children.";
 
 /** Site description: Organization schema, llms.txt, llms-full.txt and RSS. */
 export const SITE_DESCRIPTION =
-  "The Home School Barn offers thoughtfully crafted, beautifully designed educational materials and practical learning experiences for curious children. Families can explore and use individual printable resources and curated collections across a range of subjects, seasons and themes.";
+  "The Homeschool Barn offers thoughtfully crafted, beautifully designed educational materials and practical learning experiences for curious children. Families can explore and use individual printable resources and curated collections across a range of subjects, seasons and themes.";
 
 /** URL segment for articles. Changing it requires redirects for every article. */
 export const ARTICLES_BASE = "articles";
@@ -23,14 +23,14 @@ export const ARTICLES_BASE = "articles";
  */
 export const SAME_AS: string[] = [];
 
-/** Organization logo (512×512 PNG). Placeholder until the real logo exists. */
+/** Organization logo (512×512 PNG, square brand icon). */
 export const LOGO_PATH = "/logo.png";
 
 /**
  * Other names the company goes by. Set on every Organization node (BaseLayout).
  * OPEN (intake): confirm whether any abbreviation should be used.
  */
-export const ORG_ALTERNATE_NAMES: string[] = ["thehomeschoolbarn.com"];
+export const ORG_ALTERNATE_NAMES: string[] = ["The Home School Barn", "thehomeschoolbarn.com"];
 
 /** Initial content pillars (Organization knowsAbout). */
 export const ORG_KNOWS_ABOUT: string[] = [
@@ -55,7 +55,7 @@ export const SITE_IDENTITY: SiteIdentity = {
 /** Article bylines are profiled on the About page, anchored by slug ("/about/#editorial"). */
 export const AUTHOR_PATH: AuthorPath = (slug) => `/about/#${slug}`;
 
-/** Default marketing Open Graph image (1200×630). Placeholder until the brand image exists. */
+/** Default marketing Open Graph image (1200×630). */
 export const DEFAULT_OG_IMAGE = "/og-default.png";
 
 /**

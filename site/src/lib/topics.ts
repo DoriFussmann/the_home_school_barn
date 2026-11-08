@@ -10,7 +10,7 @@ export const TOPICS = [
     "name": "history and civilizations",
     "slug": "history-and-civilizations",
     "pillar": "history-and-civilizations",
-    "title": "Teaching History to Children | The Home School Barn",
+    "title": "Teaching History to Children | The Homeschool Barn",
     "h1": "History and civilizations",
     "description": "Ways to explore history and ancient civilizations with children aged 3 to 10: thoughtful ideas, conversations and printable learning resources for families.",
     "intro": "How to bring the past to life for young children: people, places and civilizations, explored through stories, conversation and hands-on discovery."
@@ -19,7 +19,7 @@ export const TOPICS = [
     "name": "science and the natural world",
     "slug": "science-and-the-natural-world",
     "pillar": "science-and-the-natural-world",
-    "title": "Science and Nature for Children | The Home School Barn",
+    "title": "Science and Nature for Children | The Homeschool Barn",
     "h1": "Science and the natural world",
     "description": "Ideas for exploring science and nature with young children: observation, discovery and printable resources that explain how the world works at their level.",
     "intro": "Helping curious children understand the world around them, from how the Earth formed to the plants and animals outside the door."
@@ -28,7 +28,7 @@ export const TOPICS = [
     "name": "mathematics and discovery",
     "slug": "mathematics-and-discovery",
     "pillar": "mathematics-and-discovery",
-    "title": "Hands-On Math for Young Children | The Home School Barn",
+    "title": "Hands-On Math for Young Children | The Homeschool Barn",
     "h1": "Mathematics and discovery",
     "description": "Hands-on ways to explore numbers, shapes, patterns and fractions with children aged 3 to 10, with practical activities and printable learning resources.",
     "intro": "Practical, hands-on ways to explore numbers, patterns and shapes, so that math becomes something children discover rather than just practice."
@@ -37,7 +37,7 @@ export const TOPICS = [
     "name": "seasons, holidays and traditions",
     "slug": "seasons-holidays-and-traditions",
     "pillar": "seasons-holidays-and-traditions",
-    "title": "Seasonal Learning for Children | The Home School Barn",
+    "title": "Seasonal Learning for Children | The Homeschool Barn",
     "h1": "Seasons, holidays and traditions",
     "description": "Meaningful learning activities for the seasons, holidays and traditions through the year, with ideas and printable resources for children aged 3 to 10.",
     "intro": "Learning that follows the year: seasons, holidays and traditions explored with children through activities, conversation and observation."
@@ -46,7 +46,7 @@ export const TOPICS = [
     "name": "geography, culture and the world",
     "slug": "geography-culture-and-the-world",
     "pillar": "geography-culture-and-the-world",
-    "title": "Geography and Cultures for Children | The Home School Barn",
+    "title": "Geography and Cultures for Children | The Homeschool Barn",
     "h1": "Geography, culture and the world",
     "description": "Ideas for exploring geography, maps and cultures around the world with young children, with thoughtful activities and printable learning resources.",
     "intro": "Exploring the wider world with children: places, maps, peoples and cultures, approached with curiosity and care."
