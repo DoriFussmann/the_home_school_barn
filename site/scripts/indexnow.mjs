@@ -3,11 +3,11 @@
  * Tell IndexNow (Bing, Yandex, Seznam, Naver…) which pages changed.
  *
  *   node site/scripts/indexnow.mjs --diff <baseSha> <headSha>   # pages changed between two commits
- *   node site/scripts/indexnow.mjs https://noblackswan.com/a/ …  # explicit URLs
+ *   node site/scripts/indexnow.mjs https://thehomeschoolbarn.com/a/ …  # explicit URLs
  *   add --dry-run to print the list without submitting
  *
  * Run from the repo root. The key file lives at site/public/<KEY>.txt and is
- * served at https://noblackswan.com/<KEY>.txt; submission is refused until
+ * served at https://thehomeschoolbarn.com/<KEY>.txt; submission is refused until
  * that file is live, so it never runs ahead of a deploy.
  *
  * What counts as changed (--diff):
@@ -19,7 +19,7 @@
 import { execFileSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 
-const HOST = "noblackswan.com";
+const HOST = "thehomeschoolbarn.com";
 const ORIGIN = `https://${HOST}`;
 const ENDPOINT = "https://api.indexnow.org/indexnow";
 

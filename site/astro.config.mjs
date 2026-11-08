@@ -7,8 +7,8 @@ export default defineConfig({
   site: SITE_URL,
   trailingSlash: "always",
   output: "static",
-  // /book-call/ stays indexable but is kept out of the sitemap, as before.
-  integrations: [seoSitemap({ exclude: ["/book-call/"] })],
+  // Pages marked noindex (e.g. an empty library) are left out of the sitemap automatically.
+  integrations: [seoSitemap()],
   markdown: {
     remarkPlugins: [remarkPreserveWts],
     rehypePlugins: [rehypeEmitWtsComments, rehypeKeyTakeaways],
