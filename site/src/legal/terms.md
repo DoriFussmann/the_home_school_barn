@@ -5,11 +5,11 @@
 
 ## 1. About These Terms
 
-These terms govern your use of https://thehomeschoolbarn.com/ and the free and paid resources offered on it. The website is operated by [OPEN: legal entity name] ("The Home School Barn," "we," "us," or "our"). By using the website or downloading a resource, you agree to these terms.
+These terms govern your use of https://thehomeschoolbarn.com/ and the free and paid resources offered on it. The website is operated by [OPEN: legal entity name] ("The Homeschool Barn," "we," "us," or "our"). By using the website or downloading a resource, you agree to these terms.
 
 ## 2. What We Offer
 
-The Home School Barn publishes printable, downloadable learning resources for children, mainly as PDF files: free resources, individual paid resources and curated collections.
+The Homeschool Barn publishes printable, downloadable learning resources for children, mainly as PDF files: free resources, individual paid resources and curated collections.
 
 The resources are designed to stand alone. They are not a curriculum, are not tied to a particular educational method, and do not promise any specific educational outcome. You decide whether a resource suits your child and how to use it. Age ranges are a guide only.
 

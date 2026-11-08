@@ -1,4 +1,4 @@
-# The Home School Barn
+# The Homeschool Barn
 
 Public site for thehomeschoolbarn.com (Astro, static): a digital educational publishing brand offering printable learning resources (free and paid PDFs) and curated collections for curious children aged roughly 3 to 10. Articles are written and published into `site/src/content/articles/` by TNV.
 
@@ -24,7 +24,7 @@ Minimal resource file:
 ---
 title: Resource title
 summary: One or two sentences for cards and the page intro.
-seoTitle: 50 to 60 characters, ending with | The Home School Barn
+seoTitle: 50 to 60 characters, ending with | The Homeschool Barn
 seoDescription: 140 to 160 characters.
 free: true
 ages: Ages 5–7
@@ -44,4 +44,4 @@ Without them, the site shows "opens soon" instead of the forms.
 
 ## Brand
 
-The logo, favicon, `public/logo.png`, `public/og-default.(png|svg)` and `site/src/assets/brand/byline.png` are **placeholders** (a simple barn mark and Inter wordmark) until the real brand identity exists. Colors and fonts are still the inherited design system and are open for a brand decision.
+The logo (`site/src/assets/brand/`), favicon, `public/logo.png`, `public/og-default.(png|svg)` and the byline image are a vector rebuild of the supplied logo: Figtree Bold wordmark, navy `#000E29`, cream `#FFF4EA`, lavender `#BDBEFE`. Site colors and fonts are still the inherited design system.

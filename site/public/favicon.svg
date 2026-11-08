@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 448">
-  <!-- PLACEHOLDER brand mark: the logo is OPEN in the intake. Replace with the real logo. -->
-  <rect width="448" height="448" rx="96" fill="#F6F8F5"/>
-  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
-    <path stroke="#1A1A2E" stroke-width="26" d="M64 212 L120 112 L224 60 L328 112 L384 212 L384 396 L64 396 Z"/>
-    <path stroke="#B5935A" stroke-width="22" d="M172 396 L172 268 L276 268 L276 396 M172 268 L276 396 M276 268 L172 396"/>
-    <path stroke="#B5935A" stroke-width="18" d="M200 176 L248 176"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 448" role="img" aria-label="The Homeschool Barn">
+  <!-- The Homeschool Barn logo: vector rebuild of the supplied artwork (Figtree, outlined). -->
+  <rect width="448" height="448" rx="88" fill="#000E29"/>
+  <g transform="translate(56 92)"><path fill="#FFF4EA" fill-rule="evenodd" d="M169 0 L46 76 Q22 92 0 156 L0 254 L336 254 L336 156 Q314 92 290 76 Z M169 37 L102 76 Q54 104 48 141 L48 254 L288 254 L288 141 Q282 104 236 76 Z"/>
+    <g fill="#FFF4EA"><rect x="145" y="81" width="20" height="20"/><rect x="174" y="81" width="20" height="20"/><rect x="145" y="109" width="20" height="20"/><rect x="174" y="109" width="20" height="20"/></g>
+    <rect fill="#BDBEFE" x="75" y="157" width="187" height="97"/>
+    <path fill="none" stroke="#000E29" stroke-width="12" d="M168 157 L168 254 M75 157 L162 254 M162 157 L75 254 M174 157 L262 254 M262 157 L174 254"/></g>
 </svg>
