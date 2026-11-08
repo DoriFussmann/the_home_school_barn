@@ -20,7 +20,7 @@ jobs:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.deployment_status.state == 'success' &&
-       github.event.deployment.environment == 'Production – no-black-swan')
+       github.event.deployment.environment == 'Production – the-home-school-barn')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
