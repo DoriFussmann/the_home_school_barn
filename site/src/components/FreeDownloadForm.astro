@@ -1,0 +1,45 @@
+---
+/**
+ * Free-resource request (DECIDED: an email address is required for a free download).
+ * Newsletter consent is a separate, unticked box (DECIDED: a download request is
+ * not consent to marketing). Delivery flow is OPEN, so the copy does not say how
+ * the file arrives. Without an endpoint the form is not shown.
+ */
+import { FREE_DOWNLOAD_ENDPOINT } from "../config/publicEnv";
+import { SITE_NAME } from "../config/site";
+import { sitePath } from "../lib/url";
+
+interface Props {
+  slug: string;
+  title: string;
+  endpoint?: string;
+}
+
+const { slug, title, endpoint } = Astro.props;
+const action = (endpoint || FREE_DOWNLOAD_ENDPOINT).trim();
+const id = `free-${slug}`;
+---
+
+<div class="lead-form resource-action">
+  <p class="type-label">Free resource</p>
+  {action ? (
+    <form class="mt-md" method="post" action={action}>
+      <input type="hidden" name="resource" value={slug} />
+      <label class="type-label" for={`${id}-email`}>Email address</label>
+      <input id={`${id}-email`} class="field-input" type="email" name="email" autocomplete="email" required />
+      <label class="resource-consent type-body-sm mt-md" for={`${id}-consent`}>
+        <input id={`${id}-consent`} type="checkbox" name="newsletter_consent" value="yes" />
+        <span>Also send me the {SITE_NAME} newsletter. Optional; unsubscribe at any time.</span>
+      </label>
+      <p class="mt-lg">
+        <button class="btn-primary" type="submit">Download Free</button>
+      </p>
+      <p class="form-note type-body-sm">
+        Enter your email address to receive “{title}”. See the
+        <a href={sitePath("/privacy/")}>privacy policy</a>.
+      </p>
+    </form>
+  ) : (
+    <p class="type-body mt-md">This free resource will be available to download soon.</p>
+  )}
+</div>

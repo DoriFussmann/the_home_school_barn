@@ -2008,11 +2008,6 @@
     object-fit: contain;
   }
 
-  .case-card__logo--yale img {
-    max-height: 16px;
-    max-width: 41px;
-  }
-
   .case-card__role {
     margin: 0 0 0 auto;
     min-width: 0;
@@ -2787,5 +2782,102 @@
 
   .logo-marquee__fade {
     display: none;
+  }
+}
+
+/* Resource library (The Home School Barn): tiles, badges, forms, product facts. */
+@layer components {
+  .resource-tile__cover {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .resource-tile__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .resource-tile__blank {
+    width: 100%;
+    height: 100%;
+    background: theme("colors.primary.tint");
+  }
+
+  .resource-tile__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: theme("spacing.sm");
+  }
+
+  .resource-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border: 1px solid theme("colors.heading");
+    border-radius: 999px;
+    color: theme("colors.heading");
+  }
+
+  .resource-badge--free {
+    border-color: theme("colors.accent.DEFAULT");
+    color: theme("colors.accent.text");
+  }
+
+  .resource-facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: theme("spacing.sm") theme("spacing.lg");
+    margin: 0;
+  }
+
+  .resource-facts dt {
+    font-weight: 500;
+    color: theme("colors.heading");
+  }
+
+  .resource-facts dd {
+    margin: 0;
+  }
+
+  .resource-consent {
+    display: flex;
+    gap: theme("spacing.sm");
+    align-items: flex-start;
+  }
+
+  .resource-consent input {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+
+  .newsletter__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: theme("spacing.md");
+    align-items: flex-end;
+  }
+
+  .newsletter__row .field-input {
+    flex: 1 1 16rem;
+    width: auto;
+  }
+
+  .principle-list {
+    display: grid;
+    gap: theme("spacing.lg");
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .principle-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: theme("spacing.xl");
+    }
   }
 }

@@ -1,155 +1,96 @@
-**Effective date:** November 6, 2026  
-**Last updated:** November 6, 2026
+**Effective date:** [OPEN: date of publication]  
+**Last updated:** [OPEN: date of publication]
+
+> **Draft for review.** Items marked [OPEN] depend on decisions not yet made (legal entity, contact email, email and commerce platforms). This policy must be reviewed, ideally by a lawyer, before launch.
 
 ## 1. Who We Are
 
-No Black Swan is a small AI integration agency. We help startups and growing businesses put AI to work in their operations, workflows and everyday decisions.
+The Home School Barn is an independent publisher of printable educational resources for children, sold and offered for free to parents and educators at https://thehomeschoolbarn.com/.
 
-This Privacy Policy describes how The Night Ventures, LLC, doing business as No Black Swan ("No Black Swan," "we," "us," or "our"), collects, uses, discloses and protects personal information when you visit https://www.noblackswan.com/, contact us, book a call, or work with us.
+This Privacy Policy explains how [OPEN: legal entity name] ("The Home School Barn," "we," "us," or "our") collects, uses, shares and protects personal information when you visit the website, download a free resource, buy a resource, or join the newsletter.
 
-**Business address:**  
-The Night Ventures, LLC  
-321 South Main Street, #543  
-Sebastopol, CA 95472  
-United States
-
-**Privacy contact:** dori@noblackswan.com
-
-This Policy applies to website visitors, prospective clients, clients and their representatives, and individuals whose information we process while delivering services to a client.
+**Business address:** [OPEN: business address]  
+**Privacy contact:** [OPEN: contact email]
 
 ## 2. Information We Collect
 
-### Information you provide
+### Information you give us
 
-- **Contact information:** name, business email address, telephone number, company, job title and other contact details.
-- **Business information:** what your company does, its size, systems, workflows, how your team uses AI today, your goals and constraints, and other information you share on a call or during an engagement.
-- **Communications:** emails, booking details, meeting notes, feedback, questions and other correspondence.
-- **Engagement information:** scope, plans, approvals, project records and service-related documents.
-
-Please avoid sending sensitive personal information, or confidential information belonging to others, unless it is necessary for the engagement and you are authorized to share it.
-
-### Information we access while delivering services
-
-To integrate AI into a client's operations, we may be given access to the client's systems, documents and data, which can include personal information about the client's employees, customers or suppliers. We access and use that information only as needed for the agreed work and on the client's instructions. The client remains responsible for having the right to share it and for any notices or consents its own customers and staff require.
+- **Email address**, when you request a free resource or join the newsletter.
+- **Purchase information**, when you buy a resource: your name, email address, billing details and what you bought. Payment card details are handled by our payment provider; we do not see or store full card numbers.
+- **Messages** you send us, and anything you include in them.
 
 ### Information collected automatically
 
-When you visit our website, some information may be collected automatically, depending on your browser settings. This may include:
+- **Usage data** if analytics are enabled: pages visited, referring pages, approximate location derived from your IP address, browser and device type. We use Google Analytics only if it is switched on for the site, and this policy will name it when it is.
+- **Server logs** kept by our hosting provider, such as IP address, time of request and the page requested.
+- **Automated crawler requests.** We record visits by automated crawlers (for example, search engine and AI crawlers) to understand how our pages are indexed. This does not track individual human visitors.
 
-- IP address and general location derived from it.
-- Browser, device, operating system and technical identifiers.
-- Pages visited, referring pages, time on page and interactions with website content.
-- Diagnostic, security and performance information.
+## 3. Children's Privacy
 
-We use Google Analytics for website analytics. The information it collects is limited to website usage and the technical information described above.
+Our resources are made for children, but this website is intended for parents, carers and educators, and is not directed to children. We do not knowingly collect personal information from children under 13 (or the equivalent minimum age where you live). Free downloads, purchases and newsletter signups are for adults.
 
-## 3. How We Use Information
+If you believe a child has given us personal information, contact us and we will delete it.
 
-We may use personal information to:
+> [OPEN: legal review] Because the products are for children aged roughly 3 to 10, confirm how the U.S. Children's Online Privacy Protection Act (COPPA), and the UK Age Appropriate Design Code or EU GDPR if selling outside the U.S., apply to the final site, the checkout and any email platform before launch.
 
-1. Respond to inquiries and meeting requests.
-2. Assess whether our services fit a prospective client.
-3. Understand a client's business, workflows, systems and goals.
-4. Design, configure, connect and improve AI solutions within a client's operations.
-5. Train and support a client's team, and measure what changed.
-6. Provide, administer, improve and support our services and website.
-7. Communicate about engagements, service changes and relevant business matters.
-8. Protect our systems, prevent misuse, investigate incidents and enforce contractual rights.
-9. Comply with legal obligations and establish, exercise or defend legal claims.
+## 4. How We Use Information
 
-We do not promise any particular business result from our services.
+- To deliver the free or paid resources you request, and to let you download them again where offered.
+- To process payments, send receipts and handle refunds and support.
+- To send the newsletter, only if you have separately agreed to receive it. Asking for a free resource does not sign you up to the newsletter.
+- To answer your messages.
+- To understand how the website is used and improve it.
+- To prevent fraud and abuse, and to meet legal, tax and accounting obligations.
 
-## 4. Legal Bases for Processing
+We do not sell your personal information.
 
-Where applicable privacy law requires a legal basis for processing, including the European Union's General Data Protection Regulation (GDPR), we rely on an appropriate basis depending on the circumstances:
+## 5. Your Email and the Newsletter
 
-- **Contract:** processing necessary to enter into or perform a contract with a client.
-- **Legitimate interests:** processing for legitimate business purposes, such as responding to inquiries, administering services, security and business development, where those interests are not overridden by your rights.
-- **Consent:** processing where consent is required or where we choose to rely on it.
-- **Legal obligations:** processing necessary to comply with applicable law.
+Your email address is needed to send you a free resource. Joining the newsletter is a separate choice, made with its own unticked box or its own signup form. Every newsletter includes a link to unsubscribe, and you can unsubscribe at any time.
 
-When we process personal information inside a client's systems on the client's instructions, we act on the client's behalf, and the client determines the purposes of that processing.
+[OPEN: whether free-download emails include a welcome sequence. Describe it here if one is added.]
 
-## 5. How We Share Information
+## 6. How We Share Information
 
-### Service providers
+We share personal information only with service providers that help us run the business, under contracts that limit their use of it:
 
-We share information with vendors that help us run our website or deliver our services, only as needed for that purpose:
+- **Email platform:** [OPEN: provider]
+- **Payments and digital delivery:** [OPEN: provider(s)]
+- **Website hosting:** Vercel
+- **Analytics:** Google Analytics, if enabled
 
-- **Vercel:** website hosting.
-- **Google Analytics:** website analytics.
-- **Cal.com:** scheduling calls booked through the website.
-- **Email, document and payment providers:** business email, shared documents, invoicing and payments.
-- **AI model providers and software tools:** the AI services and tools selected for a client's engagement. Where possible these run under the client's own accounts or with the client's approval, and we choose settings that limit how providers retain or use client data.
+We may also disclose information when required by law, to protect our rights or the safety of others, or as part of a sale or transfer of the business.
 
-### Legal and business purposes
+## 7. Cookies
 
-We may disclose information when reasonably necessary to comply with law, respond to valid legal process, protect rights and safety, investigate suspected misconduct, or support a merger, financing, acquisition or transfer of our business, subject to applicable legal requirements.
+The website itself does not need cookies to work. If analytics are enabled, Google Analytics uses cookies to measure visits. Our payment and email providers may set their own cookies on their pages. [OPEN: add a cookie notice or consent banner if required for the markets you sell to.]
 
-We do not sell personal information.
+## 8. How Long We Keep Information
 
-## 6. Cookies and Analytics
+- Newsletter subscribers: until you unsubscribe.
+- Free-download requests: [OPEN: retention period].
+- Purchase records: as long as needed for tax and accounting rules.
+- Analytics data: according to the retention setting in Google Analytics.
 
-We use Google Analytics to understand website usage and improve the website. Analytics technologies may use cookies or similar identifiers to collect information about visits and interactions. Google processes this information under its own terms and privacy practices.
+## 9. Your Rights
 
-You can control cookies through your browser settings. Where applicable law requires consent before non-essential analytics are used, we will implement an appropriate consent mechanism. Blocking cookies may affect some website functionality.
+Depending on where you live, you may have the right to access, correct, delete or receive a copy of your personal information, and to object to or restrict how we use it. To make a request, contact us at [OPEN: contact email]. California residents have the right to know, delete and correct personal information, and not to be discriminated against for exercising these rights.
 
-## 7. Data Retention
+## 10. Security
 
-We keep personal information only as long as reasonably necessary for the purposes in this Policy, including delivering services, keeping business records, resolving disputes, enforcing agreements and meeting legal obligations. For example:
+We use reputable providers and reasonable measures to protect personal information. No method of transmission or storage is completely secure.
 
-- Inquiry information is kept while needed to respond and manage a prospective relationship.
-- Engagement records are kept during an engagement and for an appropriate period afterward.
-- Access to a client's systems ends when the engagement ends, and client data we hold is returned or deleted as agreed with the client.
-- Technical and analytics information is kept according to the settings of the relevant systems.
+## 11. International Transfers
 
-When information is no longer required, we take reasonable steps to delete or anonymize it, or otherwise handle it in accordance with applicable law.
+Our service providers may process information in the United States and other countries. Where required, transfers are protected by appropriate safeguards.
 
-## 8. Data Security
+## 12. Changes to This Policy
 
-We use reasonable technical and organizational measures to protect personal information against unauthorized access, disclosure, alteration and destruction, including limiting system access to what an engagement needs. No website, email system or storage method is completely secure, and we cannot guarantee absolute security.
+We may update this policy. The "Last updated" date shows when it last changed.
 
-## 9. International Data Transfers
+## 13. Contact Us
 
-We work with clients in several countries. Information may be processed in countries other than the one where it was collected, depending on where we and our service providers operate. Where applicable law restricts international transfers, we use an appropriate transfer mechanism and safeguards.
-
-## 10. Your Privacy Rights
-
-Depending on where you live and applicable law, you may have rights to:
-
-- Access the personal information we hold about you.
-- Correct inaccurate information.
-- Delete personal information.
-- Restrict or object to certain processing, including direct marketing.
-- Receive a portable copy of certain information.
-- Withdraw consent where processing is based on consent.
-- Lodge a complaint with a data protection authority.
-
-These rights are subject to applicable exceptions. To make a request, email dori@noblackswan.com with the subject line **Privacy Request**. We may need to verify your identity or authority before acting on it, and we will respond within the time required by law.
-
-If your information is in a client's systems that we work on, we may refer your request to that client, which controls that information.
-
-## 11. California Privacy Information
-
-California residents may have additional rights under California privacy law, depending on whether that law applies to us and the processing in question. These may include the right to know about personal information collected, used or disclosed; to request deletion or correction; and not to be discriminated against for exercising these rights. To make a request, email dori@noblackswan.com with the subject line **California Privacy Request**.
-
-## 12. Third-Party Websites and Services
-
-Our website and communications may link to third-party websites and services. Their privacy practices are governed by their own policies, not this Policy.
-
-## 13. Children's Privacy
-
-Our website and services are for business users and are not directed to children. We do not knowingly collect personal information from children through the website. If you believe a child has given us personal information, email dori@noblackswan.com so we can address it.
-
-## 14. Changes to This Policy
-
-We may update this Policy as our services, technology or legal obligations change. We will post the revised version on this page and update the "Last updated" date. Where required by law, we will give additional notice or obtain consent for material changes.
-
-## 15. Contact Us
-
-**The Night Ventures, LLC d/b/a No Black Swan**  
-321 South Main Street, #543  
-Sebastopol, CA 95472  
-United States
-
-Email: dori@noblackswan.com
+[OPEN: legal entity name]  
+[OPEN: business address]  
+[OPEN: contact email]

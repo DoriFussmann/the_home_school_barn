@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_NAME } from "../../config/site";
+import { Content } from "../../legal/downloads.md";
+
+const title = `Downloads and Refunds Policy | ${SITE_NAME}`;
+const description = "How downloads of The Home School Barn printable resources work: what you receive, delivery, downloading again, printing, and refunds for digital files.";
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/download-policy/">
+  <main id="main-content" class="site-wrap flex-1 py-2xl lg:py-3xl">
+    <div>
+      <h1 class="type-h1">Downloads and Refunds</h1>
+      <div class="article-body mt-lg">
+        <Content />
+      </div>
+    </div>
+  </main>
+</BaseLayout>

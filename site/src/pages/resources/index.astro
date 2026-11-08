@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import NewsletterSignup from "../../components/NewsletterSignup.astro";
+import ResourceCard from "../../components/ResourceCard.astro";
+import { SITE_NAME } from "../../config/site";
+import { getPublishedResources } from "../../lib/resources";
+import { TOPICS, topicLabel } from "../../lib/topics";
+import { sitePath } from "../../lib/url";
+
+const resources = await getPublishedResources();
+const usedSubjects = new Set(resources.flatMap((r) => r.data.subjects));
+const subjects = TOPICS.filter((topic) => usedSubjects.has(topic.name));
+const hasFree = resources.some((r) => r.data.free);
+const hasPaid = resources.some((r) => !r.data.free);
+
+const title = `Printable Learning Resources | ${SITE_NAME}`;
+const description =
+  "Browse printable learning resources for curious children aged 3 to 10, free and paid, across history, science, math, the seasons and the wider world.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/resources/"
+  robots={resources.length === 0 ? "noindex, follow" : undefined}
+>
+  <main id="main-content" class="site-wrap flex-1 py-xl lg:py-2xl">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources" }]} />
+    <h1 class="type-h1 mt-lg">The resource library</h1>
+    <p class="type-body-lg mt-md max-w-prose">
+      Printable learning resources for curious children, made to be used: to
+      explore, observe, talk about and discover together. Each resource stands
+      on its own; there is no curriculum to follow.
+    </p>
+    <p class="type-body mt-md max-w-prose">
+      Free resources are clearly marked and made with the same care as paid
+      ones. Looking for a set? See the <a href={sitePath("/collections/")}>collections</a>.
+    </p>
+
+    {resources.length === 0 ? (
+      <div class="mt-2xl">
+        <p class="type-body max-w-prose">
+          The library is being prepared. The first resources will appear here soon.
+        </p>
+        <div class="mt-xl">
+          <NewsletterSignup />
+        </div>
+      </div>
+    ) : (
+      <>
+        <form class="article-filters" id="resource-filters" role="search">
+          {hasFree && hasPaid && (
+            <div class="filter-field filter-field--topics">
+              <p class="type-label" id="resource-type-label">Show</p>
+              <div class="topic-chips" data-group="type" role="radiogroup" aria-labelledby="resource-type-label">
+                <button type="button" class="topic-chip is-active" role="radio" aria-checked="true" data-value="">All</button>
+                <button type="button" class="topic-chip" role="radio" aria-checked="false" data-value="free">Free</button>
+                <button type="button" class="topic-chip" role="radio" aria-checked="false" data-value="paid">Paid</button>
+              </div>
+            </div>
+          )}
+          {subjects.length > 1 && (
+            <div class="filter-field filter-field--topics">
+              <p class="type-label" id="resource-subject-label">Subject</p>
+              <div class="topic-chips" data-group="subject" role="radiogroup" aria-labelledby="resource-subject-label">
+                <button type="button" class="topic-chip is-active" role="radio" aria-checked="true" data-value="">All Subjects</button>
+                {subjects.map((topic) => (
+                  <button type="button" class="topic-chip" role="radio" aria-checked="false" data-value={topic.slug}>
+                    {topicLabel(topic.name)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </form>
+        <p class="type-body mt-xl" id="resource-filter-empty" hidden>No resources match these filters.</p>
+        <ul class="article-grid mt-xl" id="resource-grid">
+          {resources.map((resource) => (
+            <li
+              data-type={resource.data.free ? "free" : "paid"}
+              data-subjects={resource.data.subjects
+                .map((name) => TOPICS.find((t) => t.name === name)?.slug)
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <article>
+                <ResourceCard
+                  href={`/resources/${resource.id}/`}
+                  title={resource.data.title}
+                  summary={resource.data.summary}
+                  free={resource.data.free}
+                  price={resource.data.price}
+                  ages={resource.data.ages}
+                  cover={resource.data.cover}
+                  coverAlt={resource.data.coverAlt}
+                />
+              </article>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-2xl">
+          <NewsletterSignup />
+        </div>
+      </>
+    )}
+  </main>
+</BaseLayout>
+
+<script>
+  // Filters: ?type=free|paid and ?subject=<topic-slug>, kept in the URL.
+  const groups = [...document.querySelectorAll<HTMLElement>("#resource-filters [data-group]")];
+  const items = [...document.querySelectorAll<HTMLElement>("#resource-grid > li")];
+  const empty = document.getElementById("resource-filter-empty");
+
+  const chipsOf = (group: HTMLElement) => [...group.querySelectorAll<HTMLButtonElement>(".topic-chip")];
+  const valueOf = (name: string) => {
+    const group = groups.find((g) => g.dataset.group === name);
+    return group ? chipsOf(group).find((c) => c.classList.contains("is-active"))?.dataset.value || "" : "";
+  };
+  const select = (group: HTMLElement, value: string) => {
+    const chips = chipsOf(group);
+    const target = chips.some((c) => (c.dataset.value || "") === value) ? value : "";
+    for (const chip of chips) {
+      const active = (chip.dataset.value || "") === target;
+      chip.classList.toggle("is-active", active);
+      chip.setAttribute("aria-checked", active ? "true" : "false");
+      chip.tabIndex = active ? 0 : -1;
+    }
+  };
+
+  function apply(push = false) {
+    const type = valueOf("type");
+    const subject = valueOf("subject");
+    let visible = 0;
+    for (const item of items) {
+      const show =
+        (!type || item.dataset.type === type) &&
+        (!subject || (item.dataset.subjects || "").split(" ").includes(subject));
+      item.hidden = !show;
+      if (show) visible += 1;
+    }
+    if (empty) empty.hidden = visible > 0;
+    const url = new URL(window.location.href);
+    type ? url.searchParams.set("type", type) : url.searchParams.delete("type");
+    subject ? url.searchParams.set("subject", subject) : url.searchParams.delete("subject");
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    if (next !== `${location.pathname}${location.search}${location.hash}`) {
+      history[push ? "pushState" : "replaceState"](null, "", next);
+    }
+  }
+
+  function syncFromUrl() {
+    const params = new URLSearchParams(location.search);
+    for (const group of groups) select(group, params.get(group.dataset.group || "") || "");
+    apply();
+  }
+
+  for (const group of groups) {
+    group.addEventListener("click", (event) => {
+      const chip = (event.target as HTMLElement | null)?.closest<HTMLButtonElement>(".topic-chip");
+      if (!chip) return;
+      select(group, chip.dataset.value || "");
+      apply(true);
+    });
+  }
+  document.getElementById("resource-filters")?.addEventListener("submit", (e) => e.preventDefault());
+  window.addEventListener("popstate", syncFromUrl);
+  if (items.length) syncFromUrl();
+</script>

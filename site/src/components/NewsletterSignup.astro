@@ -1,0 +1,41 @@
+---
+/**
+ * Standalone newsletter signup (DECIDED: available independently of a free download).
+ * The email platform is OPEN: without PUBLIC_NEWSLETTER_ENDPOINT no form is shown.
+ * Newsletter content and cadence are OPEN, so the copy promises neither.
+ */
+import { NEWSLETTER_ENDPOINT } from "../config/publicEnv";
+import { SITE_NAME } from "../config/site";
+import { sitePath } from "../lib/url";
+
+interface Props {
+  headingLevel?: "h2" | "h3";
+}
+
+const { headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<section id="newsletter" class="newsletter lead-form" aria-labelledby="newsletter-heading">
+  <p class="type-label">Newsletter</p>
+  <Heading id="newsletter-heading" class="type-h2 mt-md">Join the newsletter</Heading>
+  <p class="type-body mt-md max-w-prose">
+    Hear from {SITE_NAME} when new resources, collections and articles are added
+    to the library.
+  </p>
+  {NEWSLETTER_ENDPOINT ? (
+    <form class="newsletter__form mt-lg" method="post" action={NEWSLETTER_ENDPOINT}>
+      <label class="type-label" for="newsletter-email">Email address</label>
+      <div class="newsletter__row">
+        <input id="newsletter-email" class="field-input" type="email" name="email" autocomplete="email" required />
+        <button class="btn-primary" type="submit">Join the Newsletter</button>
+      </div>
+      <p class="form-note type-body-sm">
+        By joining you agree to receive emails from {SITE_NAME}. You can
+        unsubscribe at any time. See the <a href={sitePath("/privacy/")}>privacy policy</a>.
+      </p>
+    </form>
+  ) : (
+    <p class="form-note type-body-sm">Newsletter signups open soon.</p>
+  )}
+</section>

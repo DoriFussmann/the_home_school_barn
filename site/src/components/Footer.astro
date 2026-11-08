@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { COMPANY_LINKEDIN, SITE_NAME, SITE_TAGLINE } from "../config/site";
+import { CONTACT_EMAIL, SAME_AS, SITE_NAME, SITE_TAGLINE } from "../config/site";
 import { sitePath } from "../lib/url";
 import brandLockup from "../assets/brand/lockup.svg";
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="mt-auto border-t border-border">
@@ -13,40 +15,32 @@ import brandLockup from "../assets/brand/lockup.svg";
     <p class="type-body mt-md max-w-prose">
       {SITE_TAGLINE}
     </p>
+    {CONTACT_EMAIL && (
+      <p class="type-body-sm mt-sm">
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
+    )}
     <nav class="footer-links mt-xl" aria-label="Footer">
-      <a class="nav-link" href={sitePath("/how-it-works/")}>The Process</a>
-      <a class="nav-link" href={sitePath("/services/")}>Services</a>
-      <a class="nav-link" href={sitePath("/pricing/")}>Pricing</a>
+      <a class="nav-link" href={sitePath("/resources/")}>Resources</a>
+      <a class="nav-link" href={sitePath("/resources/?type=free")}>Free Resources</a>
+      <a class="nav-link" href={sitePath("/collections/")}>Collections</a>
       <a class="nav-link" href={sitePath("/articles/")}>Articles</a>
       <a class="nav-link" href={sitePath("/about/")}>About</a>
-      <a class="nav-link" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+      <a class="nav-link" href={sitePath("/#newsletter")}>Newsletter</a>
+      <a class="nav-link" href={sitePath("/download-policy/")}>Downloads &amp; Refunds</a>
       <a class="nav-link" href={sitePath("/privacy/")}>Privacy</a>
       <a class="nav-link" href={sitePath("/terms/")}>Terms</a>
     </nav>
     <div class="mt-xl flex min-h-11 flex-wrap items-center justify-between gap-md">
-      <p class="type-body-sm">© {SITE_NAME} 2026</p>
+      <p class="type-body-sm">© {SITE_NAME} {year}</p>
       <div class="footer-social">
-      <p class="footer-rss">
-        <a
-          class="nav-link gap-sm type-body-sm"
-          href={COMPANY_LINKEDIN}
-          target="_blank"
-          rel="noopener"
-          aria-label={`${SITE_NAME} on LinkedIn`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"></path>
-          </svg>
-          LinkedIn
-        </a>
-      </p>
+      {SAME_AS.map((href) => (
+        <p class="footer-rss">
+          <a class="nav-link gap-sm type-body-sm" href={href} target="_blank" rel="noopener">
+            {new URL(href).hostname.replace(/^www\./, "")}
+          </a>
+        </p>
+      ))}
       <p class="footer-rss">
         <a class="nav-link gap-sm type-body-sm" href="/rss.xml">
           <svg

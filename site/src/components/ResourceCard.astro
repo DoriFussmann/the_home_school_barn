@@ -1,0 +1,43 @@
+---
+/**
+ * Library tile for a resource or a collection. Reuses the article-tile look.
+ * Free and paid are always marked; a price shows only when one is set.
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { sitePath } from "../lib/url";
+
+interface Props {
+  href: string;
+  title: string;
+  summary: string;
+  free?: boolean;
+  price?: string;
+  ages?: string;
+  kind?: string;
+  cover?: ImageMetadata;
+  coverAlt?: string;
+  headingLevel?: "h2" | "h3";
+}
+
+const { href, title, summary, free, price, ages, kind, cover, coverAlt, headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+const badge = free ? "Free" : price ?? "Paid";
+---
+
+<a class="article-tile resource-tile no-underline" href={sitePath(href)}>
+  <div class="media-frame resource-tile__cover">
+    {cover ? (
+      <Image src={cover} alt={coverAlt ?? ""} widths={[400, 800]} sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw" />
+    ) : (
+      <div class="resource-tile__blank" aria-hidden="true"></div>
+    )}
+  </div>
+  <p class="resource-tile__meta type-label mt-md">
+    <span class:list={["resource-badge", { "resource-badge--free": free }]}>{badge}</span>
+    {kind && <span>{kind}</span>}
+    {ages && <span>{ages}</span>}
+  </p>
+  <Heading class="type-h3 mt-sm">{title}</Heading>
+  <p class="type-body-sm mt-sm">{summary}</p>
+</a>

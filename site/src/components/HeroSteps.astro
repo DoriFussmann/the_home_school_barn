@@ -1,17 +1,17 @@
 ---
-// Home hero visual: the practical flow of an engagement, as one static card.
-// No client examples, dashboards, metrics or claims.
+// Static alternative to HeroFlow: the five steps in the intake, as one card.
+// No product names, prices, counts or claims.
 const steps = [
-  { title: "Understand the business", text: "Goals, teams, systems and how work gets done today." },
-  { title: "Identify AI opportunities", text: "Where AI can genuinely help, and where it doesn't belong." },
-  { title: "Design the solution", text: "The right approach, tools and integrations for the problem." },
-  { title: "Implement in real workflows", text: "Connected to the systems and people already doing the work." },
-  { title: "Improve over time", text: "Refine what's working and find the next opportunity." },
+  { title: "Explore the library", text: "Printable resources across history, science, math, the seasons and the wider world." },
+  { title: "Find the right resource", text: "Browse by age, subject, season or theme." },
+  { title: "Download free, or buy", text: "Free resources need only an email address; resources and collections can be bought." },
+  { title: "Receive the PDF", text: "By email, or through the download after checkout." },
+  { title: "Print, explore and enjoy together", text: "Activities, observation and conversation beyond the page." },
 ];
 ---
 
-<div class="hero-steps" role="img" aria-label="How No Black Swan works, in five steps: understand the business, identify AI opportunities, design the solution, implement in real workflows, improve over time.">
-  <p class="hero-steps__label" aria-hidden="true">How an engagement runs</p>
+<div class="hero-steps" role="img" aria-label="How The Home School Barn works, in five steps: explore the library, find the right resource, download free or buy, receive the PDF, then print, explore and enjoy it together.">
+  <p class="hero-steps__label" aria-hidden="true">How the library works</p>
   <ol class="hero-steps__list" aria-hidden="true">
     {
       steps.map((step, i) => (
@@ -25,7 +25,7 @@ const steps = [
       ))
     }
   </ol>
-  <p class="hero-steps__foot" aria-hidden="true">Business first · Human judgment at every step</p>
+  <p class="hero-steps__foot" aria-hidden="true">Free and paid resources · No curriculum to follow</p>
 </div>
 
 <style>

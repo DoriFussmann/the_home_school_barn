@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import NewsletterSignup from "../../components/NewsletterSignup.astro";
+import ResourceCard from "../../components/ResourceCard.astro";
+import { SITE_NAME } from "../../config/site";
+import { getPublishedCollections } from "../../lib/resources";
+import { sitePath } from "../../lib/url";
+
+const collections = await getPublishedCollections();
+
+const title = `Curated Learning Collections | ${SITE_NAME}`;
+const description =
+  "Curated collections of printable learning resources for curious children, gathered around a season, subject or theme so families can explore it in depth.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/collections/"
+  robots={collections.length === 0 ? "noindex, follow" : undefined}
+>
+  <main id="main-content" class="site-wrap flex-1 py-xl lg:py-2xl">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Collections" }]} />
+    <h1 class="type-h1 mt-lg">Collections</h1>
+    <p class="type-body-lg mt-md max-w-prose">
+      Curated sets of resources gathered around a season, a subject or a theme,
+      for families who want to spend longer with one idea.
+    </p>
+    <p class="type-body mt-md max-w-prose">
+      Every resource can also be found on its own in the
+      <a href={sitePath("/resources/")}>resource library</a>.
+    </p>
+
+    {collections.length === 0 ? (
+      <div class="mt-2xl">
+        <p class="type-body max-w-prose">The first collections are being put together and will appear here soon.</p>
+        <div class="mt-xl">
+          <NewsletterSignup />
+        </div>
+      </div>
+    ) : (
+      <ul class="article-grid mt-2xl">
+        {collections.map((collection) => (
+          <li>
+            <article>
+              <ResourceCard
+                href={`/collections/${collection.id}/`}
+                title={collection.data.title}
+                summary={collection.data.summary}
+                price={collection.data.price}
+                ages={collection.data.ages}
+                kind={`${collection.data.resources.length} resources`}
+                cover={collection.data.cover}
+                coverAlt={collection.data.coverAlt}
+              />
+            </article>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</BaseLayout>

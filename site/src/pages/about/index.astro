@@ -1,251 +1,125 @@
 ---
-import { getImage, Image } from "astro:assets";
+/**
+ * About: brand-focused (intake: the creator is not the public face and no
+ * personal profile is built). The #editorial anchor is the article byline target.
+ */
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CaseStack from "../../components/CaseStack.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
-import { authorUrl, orgId } from "seo-core";
-import { AUTHOR_PATH, DORI_LINKEDIN, DORI_PROFILES, SITE_NAME, SITE_URL } from "../../config/site";
-import { absoluteFileUrl, absoluteUrl, sitePath } from "../../lib/url";
-import doriPortrait from "../../assets/founder/dori-fussmann/photo.jpg";
-import linkedinLogo from "../../assets/brand/linkedin.png";
-import { getEntry } from "astro:content";
+import { orgId } from "seo-core";
+import { SITE_NAME, SITE_URL } from "../../config/site";
+import { absoluteUrl, sitePath } from "../../lib/url";
 
-const dori = (await getEntry("team", "dori-fussmann"))!;
-
-const title = "Dori Fussmann: Founder and Advisor | No Black Swan";
+const title = `About ${SITE_NAME}: Our Approach to Learning`;
 const description =
-  "Dori Fussmann is an entrepreneur, founder and business advisor who helps companies find where AI can improve their operations and put it to practical use.";
+  "The Home School Barn is an independent resource brand making beautifully crafted, practical printable learning materials for curious children aged 3 to 10.";
 
-const media = [
+const principles = [
   {
-    outlet: "Wikipedia",
-    excerpt:
-      "The Vets was an American veterinary services company that specialized in providing at-home veterinary care, founded by Shmuel Chafets and Dori Fussmann.",
-    context: "Wikipedia article on The Vets, naming Dori as co-founder.",
-    href: "https://en.wikipedia.org/wiki/The_Vets",
+    title: "Accurate and clear",
+    body: "Content is written with care for accuracy and clarity, and structured so that a child can follow it and a parent can trust it.",
   },
   {
-    outlet: "TechCrunch",
-    excerpt:
-      "The Vets, a tech-enabled pet healthcare platform that provides at-home care, has raised $40 million in seed funding led by Target Global, PICO Venture Partners and Bolt Ventures.",
-    context: "January 2022 coverage of The Vets' seed round, naming Dori as co-founder.",
-    href: "https://techcrunch.com/2022/01/27/the-vets-a-pet-healthcare-platform-that-provides-at-home-care-raises-40m-led-by-target-global/",
+    title: "Clean and beautiful",
+    body: "Pages are designed to be calm and elegant: never flashy, noisy or overly childish.",
   },
   {
-    outlet: "PR Newswire",
-    excerpt:
-      "The Vets, founded in 2021 by Daniel Sagis, Dori Fussmann and Shmuel Chafets, has gone on to transform pet care by combining technological innovation and at-home care.",
-    context: "October 2024 announcement of the merger with BetterVet.",
-    href: "https://www.prnewswire.com/news-releases/the-vets-and-bettervet-announce-merger-ushering-in-a-new-era-of-pet-healthcare-302287277.html",
+    title: "Practical and ready to use",
+    body: "Print it and begin. Where it helps, a resource includes a short parent guide explaining how to use it.",
   },
   {
-    outlet: "Veterinary Innovation Podcast",
-    excerpt:
-      "Dori shares his journey from investment banking, through start-ups, to veterinary care — and the work of building a practice that could actually hold a team.",
-    context: "Episode: Addressing Mental Well-Being Challenges in Vet Practices.",
-    href: "https://veterinaryinnovationpodcast.com/episodes/addressing-mental-well-being-challenges-in-veterinary-practices/",
+    title: "More than pages to fill in",
+    body: "Resources can invite activities, observation, conversation and discovery. Not every one needs an elaborate activity; the aim is thoughtful learning, not forced entertainment.",
   },
   {
-    outlet: "Breakit",
-    excerpt:
-      "Pluto Vets launches digital pet care and at-home vet visits in Sweden, backed by Voi founder Fredrik Hjelm, Kry founder Johannes Schildt and footballer John Guidetti.",
-    context: "Coverage of the launch of Pluto Vets in Sweden, where Dori is a Special Advisor (in Swedish).",
-    href: "https://www.breakit.se/artikel/42992/pluto-vets-vill-gora-livet-enklare-for-djuragare-backas-av-tunga-namn",
+    title: "Free means good",
+    body: "Free resources are excellent in their own right, never a watered-down sample of something paid.",
   },
   {
-    outlet: "Mayven Studios",
-    excerpt:
-      "Dori talks through his startup experience, how AI is changing software development, and where veterinary and pet care services are heading.",
-    context: "TEC #1: The Vets, full episode, with Dori as the guest (video, July 2025).",
-    href: "https://www.youtube.com/watch?v=LSBY0Ay7OPg",
+    title: "Stand-alone by design",
+    body: "Every resource can be used on its own. There is no prescribed sequence and no curriculum to keep up with.",
   },
 ];
 
-const portrait = await getImage({ src: doriPortrait, width: 800 });
-const personId = authorUrl("dori-fussmann", SITE_URL, AUTHOR_PATH);
 const jsonLd: Record<string, unknown>[] = [
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": personId,
-    name: "Dori Fussmann",
-    jobTitle: "Founder, No Black Swan",
+    "@type": "AboutPage",
+    name: title,
     description,
     url: absoluteUrl("/about/"),
-    image: absoluteFileUrl(portrait.src),
-    worksFor: {
-      "@id": orgId(SITE_URL),
-      name: SITE_NAME,
-    },
-    sameAs: DORI_PROFILES,
-    knowsAbout: dori.data.knowsAbout ?? [],
-    alumniOf: [
-      { "@type": "CollegeOrUniversity", name: "Reichman University (IDC Herzliya)" },
-      { "@type": "Organization", name: "Citi" },
-      { "@type": "Organization", name: "Morgan Stanley" },
-      { "@type": "Organization", name: "Ion Pacific" },
-      { "@type": "Organization", name: "The Vets" },
-    ],
-    hasOccupation: [
-      { "@type": "Occupation", name: "Founder, No Black Swan" },
-      { "@type": "Occupation", name: "Founder and CEO, later Co-founder and COO, The Vets" },
-      { "@type": "Occupation", name: "Fractional CFO" },
-      { "@type": "Occupation", name: "Mentor, Cornell Tech Runway Startups Program" },
-      { "@type": "Occupation", name: "Mentor, Yale Tsai Center for Innovative Thinking (Tsai CITY)" },
-    ],
-    affiliation: [
-      { "@type": "Organization", name: "BlueMark", url: "https://bluemark.co/" },
-      { "@type": "Organization", name: "Cornell Tech Runway Startups Program", url: "https://tech.cornell.edu/impact/runway" },
-      { "@type": "Organization", name: "Tsai Center for Innovative Thinking at Yale", url: "https://city.yale.edu/" },
-    ],
-    knowsLanguage: ["English", "Hebrew", "German"],
-    subjectOf: media.map((item) => ({ "@type": "CreativeWork", name: item.context, url: item.href, publisher: { "@type": "Organization", name: item.outlet } })),
+    mainEntity: { "@id": orgId(SITE_URL) },
   },
 ];
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonicalPath="/about/"
-  jsonLd={jsonLd}
->
+<BaseLayout title={title} description={description} canonicalPath="/about/" jsonLd={jsonLd}>
   <main id="main-content" class="flex-1">
-    <section class="site-wrap section-block pt-2xl lg:pt-3xl" aria-labelledby="dori-fussmann">
-      <div class="founder-grid founder-grid--about founder-grid--about-page">
-        <div class="founder-copy">
-          <p class="type-label">About</p>
-          <h1 id="dori-fussmann" class="type-h1 mt-md">
-            Business experience. Practical AI implementation.
-          </h1>
-          <h2 class="type-h3 mt-xl">Entrepreneur, founder and business advisor</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori Fussmann is an entrepreneur, founder and business advisor. He has
-            spent years working closely with companies as a founder, fractional
-            CFO and strategic advisor, helping leadership teams navigate decisions
-            across finance, operations, growth and execution. That experience
-            shapes No Black Swan: understand the business first, then determine
-            where AI can make a practical difference and help implement it.
-          </p>
-          <h2 class="type-h3 mt-xl">Fractional CFO</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori has served as a fractional CFO for companies including BlueMark,
-            Translucent AI, Natrion and Snout. Working closely with leadership
-            teams provides a direct view into the financial and operational
-            realities of running a business. At No Black Swan, that business-level
-            understanding informs which AI opportunities are worth pursuing and
-            how to implement them responsibly.
-          </p>
-          <h2 class="type-h3 mt-xl">Fundraising and strategic finance</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori has advised companies including Ambi Robotics and Manatee on
-            fundraising and strategic finance. This work requires understanding
-            business models, priorities, financial drivers and execution
-            constraints—the same commercial perspective he brings to AI
-            integration.
-          </p>
-          <h2 class="type-h3 mt-xl">Advisory</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori has advised companies including Sniffi in India and Swift Vets in
-            Australia. His advisory work is grounded in understanding each
-            company’s situation and helping its leadership make practical
-            decisions.
-          </p>
-          <h2 class="type-h3 mt-xl">Companies founded</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori founded The Vets and led it as CEO, later serving as co-founder
-            and COO, building the company through significant growth before its
-            merger with BetterVet. He has also
-            founded and built other ventures, including No Black Swan. Building
-            and operating companies informs his approach: recommendations need to
-            work in the real world, not just on paper.
-          </p>
-          <h2 class="type-h3 mt-xl">Investment banking</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori’s earlier career included roles at Citi, Morgan Stanley and Ion
-            Pacific, advising technology and consumer companies on transactions
-            and financing. That experience developed a rigorous approach to
-            analysis, decision-making and evaluating business opportunities.
-          </p>
-          <h2 class="type-h3 mt-xl">Mentoring founders</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori has mentored founders through Cornell Tech’s Runway Startups
-            Program and Yale’s Tsai CITY. Working with founders across different
-            stages reinforces the importance of clear thinking, practical
-            prioritization and execution.
-          </p>
-          <h2 class="type-h3 mt-xl">Education</h2>
-          <p class="type-body mt-sm max-w-prose">
-            Dori holds a B.A. in Accounting and Business Management and an LL.B.
-            in Law from IDC Herzliya.
-          </p>
-          <p class="mt-xl flex flex-wrap items-center gap-md">
-            <a class="btn-primary" href={sitePath("/book-call/")}>Book a Free Consultation</a>
-            <a class="btn-quiet" href={sitePath("/how-it-works/")}>The Process</a>
-          </p>
-        </div>
-        <aside class="founder-panel">
-          <div class="founder-panel__top">
-            <Image
-              class="founder-panel__photo photo"
-              src={doriPortrait}
-              alt="Dori Fussmann, founder of No Black Swan"
-              width={192}
-              height={192}
-            />
-            <div class="founder-panel__identity">
-              <h2 class="type-h3 founder-panel__name">Dori Fussmann</h2>
-              <p class="type-label mt-xs">Founder</p>
-              <p class="founder-panel__links">
-                <a
-                  class="founder-panel__linkedin"
-                  href={DORI_LINKEDIN}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Dori Fussmann on LinkedIn"
-                >
-                  <Image src={linkedinLogo} alt="" width={20} height={20} />
-                </a>
-              </p>
-            </div>
-            <button
-              type="button"
-              class="founder-panel__expand"
-              data-case-expand
-              aria-expanded="false"
-              aria-label="Expand all roles"
-            >
-              <span class="founder-panel__expand-chevron" aria-hidden="true"></span>
-            </button>
-          </div>
-          <CaseStack />
-        </aside>
-      </div>
+    <section class="site-wrap section-block pt-2xl lg:pt-3xl" aria-labelledby="about-heading">
+      <p class="type-label">About</p>
+      <h1 id="about-heading" class="type-h1 mt-md max-w-prose">
+        A home for beautifully crafted learning experiences for curious children.
+      </h1>
+      <p class="type-body-lg mt-lg max-w-prose">
+        {SITE_NAME} is an independent resource brand and a growing library of
+        educational materials. It makes thoughtfully crafted, beautifully
+        designed printable resources and practical learning experiences, across
+        a range of subjects, seasons and themes.
+      </p>
+
+      <h2 class="type-h3 mt-2xl">Who it is for</h2>
+      <p class="type-body mt-sm max-w-prose">
+        Homeschooling parents and families with children aged roughly 3 to 10
+        come first. The resources are also for parents looking for thoughtful
+        ways to supplement their children’s education, and may be useful to
+        tutors, educators and homeschool co-ops.
+      </p>
+
+      <h2 class="type-h3 mt-xl">An independent approach</h2>
+      <p class="type-body mt-sm max-w-prose">
+        {SITE_NAME} is not a prescribed curriculum and does not follow a single
+        educational method. Some of its work may share ideas with approaches
+        such as Waldorf education, but the library is not tied to any one
+        philosophy. Each resource stands on its own, and families are free to
+        use them in whatever order suits them.
+      </p>
+      <p class="type-body mt-md max-w-prose">
+        The library grows around what is genuinely worth exploring, rather than
+        a fixed syllabus or publishing schedule.
+      </p>
+
+      <h2 class="type-h3 mt-xl">What it does not promise</h2>
+      <p class="type-body mt-sm max-w-prose">
+        Every child is different. The resources are made with care, but they do
+        not promise a set sequence or particular educational outcomes. You know
+        your child best.
+      </p>
     </section>
 
-    <section class="site-wrap section-block rule reveal" aria-labelledby="media-heading">
-      <p class="type-label">Selected media</p>
-      <h2 id="media-heading" class="type-h2 mt-md">
-        Building, operating and advising businesses.
-      </h2>
-      <ul class="mt-2xl">
-        {
-          media.map((item) => (
-            <li class="media-card">
-              <p class="type-label">{item.outlet}</p>
-              <blockquote class="media-card__excerpt mt-md">
-                {item.excerpt}
-              </blockquote>
-              <p class="type-body-sm mt-md">{item.context}</p>
-              <p class="mt-md">
-                <a href={item.href} rel="noopener noreferrer" target="_blank">
-                  Read on {item.outlet}
-                </a>
-              </p>
-            </li>
-          ))
-        }
+    <section class="site-wrap section-block rule reveal" aria-labelledby="principles-heading">
+      <p class="type-label">How resources are made</p>
+      <h2 id="principles-heading" class="type-h2 mt-md">Beautiful, practical and ready to use.</h2>
+      <ul class="principle-list mt-2xl">
+        {principles.map((item) => (
+          <li>
+            <h3 class="type-h3">{item.title}</h3>
+            <p class="type-body mt-sm">{item.body}</p>
+          </li>
+        ))}
       </ul>
+    </section>
+
+    <section id="editorial" class="site-wrap section-block rule reveal" aria-labelledby="editorial-heading">
+      <p class="type-label">Articles</p>
+      <h2 id="editorial-heading" class="type-h2 mt-md">About our articles</h2>
+      <p class="type-body mt-md max-w-prose">
+        Articles on {SITE_NAME} are published under the brand name. They aim to
+        answer the questions parents actually ask, such as how to explain a
+        topic or how to mark a season or holiday with children, genuinely and
+        thoroughly, and to point to a relevant resource only where one helps.
+      </p>
+      <p class="mt-xl flex flex-wrap items-center gap-md">
+        <a class="btn-primary" href={sitePath("/resources/")}>Browse the Library</a>
+        <a class="btn-quiet" href={sitePath("/articles/")}>Read the articles</a>
+      </p>
     </section>
   </main>
   <CtaBanner />

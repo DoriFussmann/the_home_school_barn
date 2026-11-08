@@ -1,54 +1,49 @@
 import type { AuthorPath, SiteIdentity } from "seo-core";
 
-export const SITE_URL = "https://noblackswan.com";
-export const SITE_NAME = "No Black Swan";
+/**
+ * Canonical origin. Non-www is a working default.
+ * OPEN (intake): confirm www vs non-www before launch.
+ */
+export const SITE_URL = "https://thehomeschoolbarn.com";
+export const SITE_NAME = "The Home School Barn";
 
-/** Short brand tagline. Shown in the footer. */
-export const SITE_TAGLINE = "Less AI Hype. More Impact.";
+/** Short brand tagline (brand promise). Shown in the footer and hero. */
+export const SITE_TAGLINE = "Beautifully crafted learning experiences for curious children.";
 
 /** Site description: Organization schema, llms.txt, llms-full.txt and RSS. */
 export const SITE_DESCRIPTION =
-  "No Black Swan is a small AI integration agency that helps startups and growing businesses put AI to work in their operations, workflows and everyday decisions.";
+  "The Home School Barn offers thoughtfully crafted, beautifully designed educational materials and practical learning experiences for curious children. Families can explore and use individual printable resources and curated collections across a range of subjects, seasons and themes.";
 
 /** URL segment for articles. Changing it requires redirects for every article. */
 export const ARTICLES_BASE = "articles";
 
-/** Public LinkedIn profile for Dori. Used on Person schema and the founder panel. */
-export const DORI_LINKEDIN =
-  "https://www.linkedin.com/in/dori-fussmann-663ba242";
-
-/** Dori's official profiles: Person sameAs on both the About page and article bylines. */
-export const DORI_PROFILES: string[] = [
-  DORI_LINKEDIN,
-  "https://bluemark.co/team/dori-fussmann/",
-  "https://www.crunchbase.com/person/dori-fussmann",
-];
-
-/** Company LinkedIn page. Footer link and Organization sameAs. */
-export const COMPANY_LINKEDIN = "https://www.linkedin.com/company/144122085/";
-
 /**
  * Organization `sameAs` profiles. Only verified company URLs.
- * Dori's personal LinkedIn belongs on Person schema, not here.
+ * OPEN (intake): no social or company profiles supplied yet.
  */
-export const SAME_AS: string[] = [COMPANY_LINKEDIN];
+export const SAME_AS: string[] = [];
 
-/** Organization logo (512×512 PNG of the No Black Swan mark). */
+/** Organization logo (512×512 PNG). Placeholder until the real logo exists. */
 export const LOGO_PATH = "/logo.png";
 
-/** Other names the company goes by. Set on every Organization node (BaseLayout). */
-export const ORG_ALTERNATE_NAMES: string[] = ["No Black Swan", "No Black Swan AI", "noblackswan.com"];
+/**
+ * Other names the company goes by. Set on every Organization node (BaseLayout).
+ * OPEN (intake): confirm whether any abbreviation should be used.
+ */
+export const ORG_ALTERNATE_NAMES: string[] = ["thehomeschoolbarn.com"];
 
-/** What the agency is known for (Organization knowsAbout). */
+/** Initial content pillars (Organization knowsAbout). */
 export const ORG_KNOWS_ABOUT: string[] = [
-  "AI integration",
-  "AI implementation",
-  "AI consulting",
-  "Workflow automation",
-  "AI adoption",
-  "Forward deployed engineering",
-  "Operational AI",
+  "History & Civilizations",
+  "Science & The Natural World",
+  "Mathematics & Discovery",
+  "Seasons, Holidays & Traditions",
+  "Geography, Culture & The World",
 ];
+
+/** Who the resources are for (Organization audience). */
+export const ORG_AUDIENCE =
+  "Homeschooling parents and families with children aged approximately 3 to 10, and parents supplementing their children's education.";
 
 export const SITE_IDENTITY: SiteIdentity = {
   siteUrl: SITE_URL,
@@ -57,11 +52,14 @@ export const SITE_IDENTITY: SiteIdentity = {
   sameAs: SAME_AS,
 };
 
-/** Authors are profiled on the About page, anchored by slug ("/about/#dori-fussmann"). */
+/** Article bylines are profiled on the About page, anchored by slug ("/about/#editorial"). */
 export const AUTHOR_PATH: AuthorPath = (slug) => `/about/#${slug}`;
 
-/** Default marketing Open Graph image (1200×630). */
+/** Default marketing Open Graph image (1200×630). Placeholder until the brand image exists. */
 export const DEFAULT_OG_IMAGE = "/og-default.png";
 
-/** Contact email for the business. */
-export const CONTACT_EMAIL = "dori@noblackswan.com";
+/**
+ * Public contact email.
+ * OPEN (intake): no address chosen yet. Empty keeps it out of the schema and pages.
+ */
+export const CONTACT_EMAIL = "";
