@@ -1,0 +1,44 @@
+---
+import { sitePath } from "../lib/url";
+
+interface Props {
+  links: { slug: string; anchor: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<section class="rule mt-2xl pt-xl">
+  <h2 class="type-h2">Related Reads</h2>
+  <ul class="mt-lg">
+    {
+      links.map((link) => (
+        <li class="border-b border-border">
+          <a
+            class="flex min-h-11 items-center justify-between gap-md py-md font-medium no-underline"
+            href={sitePath(`/articles/${link.slug}/`)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {link.anchor}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

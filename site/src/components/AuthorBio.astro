@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { sitePath } from "../lib/url";
+
+interface Props {
+  author: CollectionEntry<"team">;
+}
+
+const { author } = Astro.props;
+const href = sitePath("/about/");
+const paragraphs = author.data.bio
+  .split(/\n+/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+---
+
+<aside class="author-card mt-2xl grid gap-lg md:grid-cols-[8rem_1fr] md:gap-xl">
+  <h2 class="type-h2 md:col-span-2">About the author</h2>
+  <Image
+    class="photo h-auto w-32"
+    src={author.data.photo}
+    alt={`Photo of ${author.data.name}`}
+    width={128}
+    height={128}
+    widths={[128, 256]}
+    sizes="128px"
+    fit="cover"
+    loading="lazy"
+  />
+  <div>
+    <h3 class="type-h3">
+      <a href={href}>{author.data.name}</a>
+    </h3>
+    <p class="type-label mt-xs">{author.data.role}</p>
+    <div class="author-bio-text mt-md">
+      {paragraphs.map((paragraph) => <p class="type-body">{paragraph}</p>)}
+    </div>
+    {author.data.credentials && (
+      <p class="type-body-sm mt-sm">{author.data.credentials}</p>
+    )}
+  </div>
+</aside>

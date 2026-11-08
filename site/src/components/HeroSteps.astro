@@ -1,0 +1,104 @@
+---
+// Home hero visual: the practical flow of an engagement, as one static card.
+// No client examples, dashboards, metrics or claims.
+const steps = [
+  { title: "Understand the business", text: "Goals, teams, systems and how work gets done today." },
+  { title: "Identify AI opportunities", text: "Where AI can genuinely help, and where it doesn't belong." },
+  { title: "Design the solution", text: "The right approach, tools and integrations for the problem." },
+  { title: "Implement in real workflows", text: "Connected to the systems and people already doing the work." },
+  { title: "Improve over time", text: "Refine what's working and find the next opportunity." },
+];
+---
+
+<div class="hero-steps" role="img" aria-label="How No Black Swan works, in five steps: understand the business, identify AI opportunities, design the solution, implement in real workflows, improve over time.">
+  <p class="hero-steps__label" aria-hidden="true">How an engagement runs</p>
+  <ol class="hero-steps__list" aria-hidden="true">
+    {
+      steps.map((step, i) => (
+        <li class="hero-steps__item">
+          <span class="hero-steps__num">{String(i + 1).padStart(2, "0")}</span>
+          <span class="hero-steps__body">
+            <span class="hero-steps__title">{step.title}</span>
+            <span class="hero-steps__text">{step.text}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="hero-steps__foot" aria-hidden="true">Business first · Human judgment at every step</p>
+</div>
+
+<style>
+  .hero-steps {
+    background: #ffffff;
+    border: 1px solid #e4e2de;
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+  }
+  .hero-steps__label {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7a5c28;
+  }
+  .hero-steps__list {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    position: relative;
+  }
+  .hero-steps__list::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    bottom: 18px;
+    width: 1px;
+    background: #e4e2de;
+  }
+  .hero-steps__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+  }
+  .hero-steps__num {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #b5935a;
+    font-family: "IBM Plex Mono", "Courier New", monospace;
+    font-size: 11px;
+    color: #7a5c28;
+  }
+  .hero-steps__body {
+    display: grid;
+    gap: 2px;
+  }
+  .hero-steps__title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #1a1a2e;
+  }
+  .hero-steps__text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #5c5c5c;
+  }
+  .hero-steps__foot {
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid #e4e2de;
+    font-size: 12px;
+    color: #5c5c5c;
+  }
+</style>

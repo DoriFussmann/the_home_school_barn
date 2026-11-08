@@ -1,0 +1,326 @@
+---
+import HeroFlow from "../components/HeroFlow.astro";
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import CaseStack from "../components/CaseStack.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import LogoMarquee from "../components/LogoMarquee.astro";
+import type { ImageMetadata } from "astro";
+import { orgId } from "seo-core";
+import { DORI_LINKEDIN, SITE_URL } from "../config/site";
+import { absoluteUrl, sitePath } from "../lib/url";
+import doriPortrait from "../assets/founder/dori-fussmann/photo.jpg";
+import linkedinLogo from "../assets/brand/linkedin.png";
+
+const logoFiles = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/logos/*.png",
+  { eager: true },
+);
+
+const clientLogos = [
+  { file: "ambi-robotics.png", name: "Ambi Robotics" },
+  { file: "bluemark.png", name: "BlueMark" },
+  { file: "guardian-vets.png", name: "GuardianVets" },
+  { file: "jbecca.png", name: "jBecca" },
+  { file: "lena-health.png", name: "LenaHealth" },
+  { file: "manatee.png", name: "Manatee" },
+  { file: "natrion.png", name: "Natrion" },
+  { file: "pluto-vets.png", name: "PlutoVets" },
+  { file: "powder-pics.png", name: "PowderPics" },
+  { file: "sorso.png", name: "Sorso" },
+  { file: "sunday.png", name: "Sunday" },
+  { file: "swift-vets.png", name: "SwiftVets" },
+  { file: "the-vets.png", name: "The Vets" },
+  { file: "translucent-ai.png", name: "Translucent AI" },
+  { file: "user1st.png", name: "User1st" },
+  { file: "vetnio.png", name: "Vetnio" },
+  { file: "yourpath.png", name: "YourPath" },
+  { file: "sniffi.png", name: "Sniffi" },
+  { file: "snout.png", name: "Snout" },
+  { file: "reside-health.png", name: "ResideHealth" },
+  { file: "dex-world.png", name: "Dex World" },
+  { file: "tailplans.png", name: "Tailplans" },
+].map((item) => {
+  const mod = logoFiles[`../assets/logos/${item.file}`];
+  if (!mod) {
+    throw new Error(`Missing logo asset: ${item.file}`);
+  }
+  return { name: item.name, src: mod.default };
+});
+
+const title = "AI Integration Agency for Growing Businesses | No Black Swan";
+const description =
+  "No Black Swan helps businesses put AI to work, integrating it into their operations, workflows and everyday decisions. Book a free consultation with Dori.";
+
+const pillars = [
+  {
+    title: "Understand & Identify",
+    summary:
+      "Learn how the business operates, identify practical AI opportunities, and agree on where to focus first.",
+    items: [
+      {
+        title: "Understand the Business",
+        body: "Learn the company’s goals, teams, systems, workflows and current constraints.",
+      },
+      {
+        title: "Identify Opportunities",
+        body: "Find repetitive work, information bottlenecks and decisions or processes where AI may help.",
+      },
+      {
+        title: "Prioritize the Work",
+        body: "Separate useful, achievable opportunities from distractions and agree on a practical starting point.",
+      },
+    ],
+  },
+  {
+    title: "Design & Implement",
+    summary:
+      "Turn the agreed priorities into working AI-enabled workflows, tools and processes.",
+    items: [
+      {
+        title: "Design the Solution",
+        body: "Choose the right approach, tools and integrations for the business and the specific problem.",
+      },
+      {
+        title: "Build & Integrate",
+        body: "Configure or develop the solution and connect it to the systems and workflows people already use.",
+      },
+      {
+        title: "Test in Real Work",
+        body: "Validate the solution with the people who will use it, refine it and put it into operation.",
+      },
+    ],
+  },
+  {
+    title: "Measure & Optimize",
+    summary:
+      "Track what’s working, improve it, then repeat with the next opportunity.",
+    items: [
+      {
+        title: "Measure What’s Working",
+        body: "Help the team adopt the new workflow, and track how it performs in everyday work.",
+      },
+      {
+        title: "Optimize",
+        body: "Address friction and improve the solution based on actual use.",
+      },
+      {
+        title: "Repeat",
+        body: "Move to the next opportunity and continue integrating AI across the business.",
+      },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: "What does No Black Swan do?",
+    answer:
+      "No Black Swan helps businesses put AI to work by identifying opportunities and integrating practical AI solutions into their operations, workflows and everyday decisions.",
+  },
+  {
+    question: "Do you only provide AI advice, or do you implement solutions too?",
+    answer:
+      "Both. We start by understanding the business and identifying where AI can help. Where there is a sensible opportunity, we design and implement the solution in the company’s actual workflows and operations.",
+  },
+  {
+    question: "Do you guarantee cost savings, revenue growth or other results?",
+    answer:
+      "No. Every business is different, and outcomes depend on the company, the opportunity and the implementation. We commit to thoughtful advice, hard work and practical implementation—not guaranteed financial or operational results.",
+  },
+  {
+    question: "What kinds of businesses do you work with?",
+    answer:
+      "We start with the business, not a fixed industry or one-size-fits-all package. The free consultation helps determine whether there are meaningful opportunities to integrate AI into your company.",
+  },
+  {
+    question: "Do we need to know which AI tools we want to use?",
+    answer:
+      "No. You do not need to arrive with a tool list or a technical plan. We begin by understanding how your business works and determine what approaches make sense.",
+  },
+  {
+    question: "What happens after the free consultation?",
+    answer:
+      "If there is a good opportunity to work together, we define the initial scope and priorities, agree on the fee, and begin with an assessment and setup phase followed by an ongoing monthly engagement.",
+  },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Integration Services",
+    provider: { "@id": orgId(SITE_URL) },
+    serviceType: "Business consulting and AI integration",
+    description,
+    url: absoluteUrl("/"),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/"
+  jsonLd={jsonLd}
+>
+  <main id="main-content" class="flex-1">
+    <section class="site-wrap pb-lg pt-xl lg:pb-xl lg:pt-2xl">
+      <div class="grid gap-xl md:grid-cols-12 md:items-center md:gap-lg">
+        <div class="hero-reveal md:col-span-6">
+          <h1 class="hero-headline">
+            <span class="type-label mb-md block">AI Integration Agency</span>
+            Less AI Hype.<br />
+            More <span class="hero-headline__accent">Impact.</span>
+          </h1>
+          <p class="type-body mt-lg max-w-prose">
+            No Black Swan is a small AI integration agency. We help
+            startups and growing businesses put AI to work in their
+            operations, workflows and everyday decisions.
+          </p>
+          <p class="type-h4 mt-md max-w-prose">
+            Everyone on your team uses AI. Nobody owns it. We do.
+          </p>
+          <p class="mt-xl flex flex-wrap items-center gap-md">
+            <a class="btn-primary" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+            <a class="btn-quiet" href="#how-it-works">See the process</a>
+          </p>
+        </div>
+        <div class="hero-reveal md:col-span-6">
+          <HeroFlow />
+        </div>
+      </div>
+    </section>
+
+    <section class="site-wrap pt-md pb-lg lg:pt-lg lg:pb-xl reveal" aria-labelledby="clients-heading">
+      <p class="type-label" id="clients-heading">Select Clients</p>
+      <div class="mt-xl">
+        <LogoMarquee logos={clientLogos} />
+      </div>
+    </section>
+
+    <section class="site-wrap pt-lg pb-xl lg:pt-xl lg:pb-2xl reveal" aria-labelledby="about-heading">
+      <div class="founder-grid founder-grid--about">
+        <div class="founder-copy">
+          <p class="type-label">About</p>
+          <h2 id="about-heading" class="type-h2 mt-md">
+            Business experience. Practical AI implementation.
+          </h2>
+          <p class="type-body mt-lg max-w-prose">
+            Dori Fussmann is an entrepreneur, founder and business advisor who
+            has spent years working closely with companies across strategy,
+            finance and operations. As a founder and fractional CFO, he has seen
+            how businesses actually run: where decisions get stuck, where
+            processes waste time, and where better systems can make a
+            difference. He brings that operating perspective to No Black Swan.
+          </p>
+          <p class="type-body mt-md max-w-prose">
+            AI is part of how Dori works and advises today, but it is never a
+            substitute for judgment or experience. No Black Swan brings those
+            together: understanding the business first, then identifying and
+            implementing practical ways to put AI to work.
+          </p>
+          <p class="mt-xl">
+            <a class="btn-quiet" href={sitePath("/about/")}>Read more about Dori’s background</a>
+          </p>
+        </div>
+        <aside class="founder-panel">
+          <div class="founder-panel__top">
+            <Image
+              class="founder-panel__photo photo"
+              src={doriPortrait}
+              alt="Dori Fussmann, founder of No Black Swan"
+              width={192}
+              height={192}
+            />
+            <div class="founder-panel__identity">
+              <h3 class="type-h3 founder-panel__name">Dori Fussmann</h3>
+              <p class="type-label mt-xs">Founder</p>
+              <p class="founder-panel__links">
+                <a
+                  class="founder-panel__linkedin"
+                  href={DORI_LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Dori Fussmann on LinkedIn"
+                >
+                  <Image
+                    src={linkedinLogo}
+                    alt=""
+                    width={20}
+                    height={20}
+                  />
+                </a>
+              </p>
+            </div>
+            <button
+              type="button"
+              class="founder-panel__expand"
+              data-case-expand
+              aria-expanded="false"
+              aria-label="Expand all roles"
+            >
+              <span class="founder-panel__expand-chevron" aria-hidden="true"></span>
+            </button>
+          </div>
+          <CaseStack />
+        </aside>
+      </div>
+    </section>
+
+    <section
+      id="how-it-works"
+      class="site-wrap section-block pt-xl pb-xl lg:pt-2xl lg:pb-2xl rule reveal"
+      aria-labelledby="process-heading"
+    >
+      <p class="type-label">The Process</p>
+      <h2 id="process-heading" class="type-h2 mt-md">
+        Understand the business. Put AI to work.
+      </h2>
+      <ol class="step-stack mt-xl">
+        {
+          pillars.map((pillar, index) => (
+            <li class="step-band">
+              <p class="step-script">Step {index + 1}</p>
+              <h3 class="type-h2">{pillar.title}</h3>
+              <p class="type-body">{pillar.summary}</p>
+              <div class="step-band__stages">
+                {pillar.items.map((item) => (
+                  <details class="pillar-item">
+                    <summary class="type-h4">{item.title}</summary>
+                    <div class="pillar-item__panel">
+                      <div class="pillar-item__body">
+                        <p class="type-body-sm">{item.body}</p>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-xl">
+        <a class="btn-quiet" href={sitePath("/how-it-works/")}>See how No Black Swan works</a>
+      </p>
+    </section>
+
+    <section class="site-wrap section-block rule reveal" aria-labelledby="faq-heading">
+      <FaqBlock faqs={faqs} bordered={false} />
+    </section>
+  </main>
+  <CtaBanner />
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import { SITE_NAME } from "../config/site";
+import { sitePath } from "../lib/url";
+import brandLockup from "../assets/brand/lockup.svg";
+
+// Buyer's path: the process, what we do, what it costs, what we know, who we are.
+const links = [
+  { href: "/how-it-works/", label: "The Process" },
+  { href: "/services/", label: "Services" },
+  { href: "/pricing/", label: "Pricing" },
+  { href: "/articles/", label: "Articles" },
+  { href: "/about/", label: "About" },
+];
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => current === href || (href !== "/" && current.startsWith(href));
+---
+
+<header class="site-header">
+  <nav class="site-wrap site-header__bar" aria-label="Primary">
+    <a class="site-logo" href={sitePath("/")} aria-label={SITE_NAME}>
+      <Image class="site-logo__lockup" src={brandLockup} alt="" height={72} loading="eager" />
+    </a>
+
+    <div class="site-nav site-nav--desktop">
+      {
+        links.map((link) => (
+          <a class="nav-link" href={sitePath(link.href)} aria-current={isCurrent(link.href) ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+      <a class="btn-primary btn-primary--sm" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+    </div>
+
+    <details class="site-menu">
+      <summary class="site-menu__toggle" aria-label="Menu">
+        <span class="site-menu__label">Menu</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <path class="site-menu__bars" d="M4 7h16M4 12h16M4 17h16"></path>
+          <path class="site-menu__close" d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </summary>
+      <div class="site-menu__panel">
+        {
+          links.map((link) => (
+            <a class="site-menu__link" href={sitePath(link.href)} aria-current={isCurrent(link.href) ? "page" : undefined}>
+              {link.label}
+            </a>
+          ))
+        }
+        <a class="btn-primary site-menu__cta" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+      </div>
+    </details>
+  </nav>
+</header>

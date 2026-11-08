@@ -1,0 +1,285 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import FaqBlock from "../../components/FaqBlock.astro";
+import { orgId } from "seo-core";
+import { SITE_URL } from "../../config/site";
+import { absoluteUrl, sitePath } from "../../lib/url";
+
+const title = "AI Integration Pricing & Engagement | No Black Swan";
+const description =
+  "Setup from $250 for the first month, then a flat monthly engagement typically from $2,000. Scaled to your business and agreed after a free consultation.";
+
+const glance = [
+  { value: "No percentage fees", label: "A flat fee for the agreed work" },
+  { value: "From $250", label: "First month: setup and assessment" },
+  { value: "From $2,000/mo", label: "Typical ongoing engagement, scaled to scope and pace" },
+  { value: "No fixed package", label: "Scope shaped around your business" },
+];
+
+const setup: { title: string; body: string; sub?: string[] }[] = [
+  { title: "Understand the business", body: "Review the company, its goals, operations, systems and current workflows." },
+  { title: "Identify opportunities", body: "Determine where AI can usefully support or improve the way work gets done." },
+  { title: "Assess feasibility and priorities", body: "Consider value, effort, dependencies, risks and what should happen first." },
+  { title: "Define the scope", body: "Agree on the initial work, responsibilities and implementation approach." },
+  { title: "Set the implementation plan", body: "Establish the first priorities and the practical steps needed to put them into operation." },
+  { title: "Agree and begin", body: "Confirm the scope and flat fee before work proceeds." },
+];
+
+const monthly = [
+  { title: "Implementation work", body: "Build, configure and integrate the agreed AI solutions into real workflows." },
+  { title: "Operational integration", body: "Connect solutions to the tools, systems and processes your team already uses, where appropriate." },
+  { title: "Iteration and refinement", body: "Improve what is in place based on actual use and changing needs." },
+  { title: "Ongoing advice", body: "Reassess priorities as the business evolves and new opportunities emerge." },
+  { title: "Next opportunities", body: "Identify and agree on further practical AI integrations as part of the ongoing engagement." },
+];
+
+const comparison = [
+  {
+    model: "Large consultancy",
+    pay: "Typically substantial project or advisory fees",
+    work: "A larger consulting team, with implementation depending on scope",
+    owner: "Often structured around a defined project and methodology",
+  },
+  {
+    model: "Independent freelancer",
+    pay: "Hourly, project or retainer fee",
+    work: "Usually focused on a specific technical deliverable",
+    owner: "Often limited to the agreed task or tool",
+  },
+  {
+    model: "DIY tools and software",
+    pay: "Subscription and internal staff time",
+    work: "Your team selects, configures and maintains the tools",
+    owner: "Depends on your internal expertise and available time",
+  },
+  {
+    model: "No Black Swan",
+    pay: "Setup from $250 (first month), then a flat monthly fee, typically from $2,000",
+    work: "Dori works with you to identify, design and implement practical AI integrations",
+    owner: "Shaped around your business, its workflows and evolving priorities",
+    highlight: true,
+  },
+];
+
+const fitYes = [
+  "Want to integrate AI into real business operations, not just experiment with tools",
+  "Are open to examining existing workflows and changing how work gets done",
+  "Want experienced business guidance alongside hands-on implementation",
+  "Are willing to work collaboratively with us to test, adopt and improve solutions",
+];
+
+const fitNo = [
+  "Expect guaranteed revenue, savings or other outcomes",
+  "Want AI added everywhere regardless of whether it makes sense",
+  "Expect a completely hands-off transformation without involvement from the business",
+];
+
+const faqs = [
+  {
+    question: "How much does it cost?",
+    answer:
+      "Setup and assessment starts from $250 for the first month, when we map the business and agree a plan. The ongoing monthly engagement typically starts from $2,000 a month and scales with the size of the project and the pace your team wants to move at. We agree the exact scope and flat fee on a free consultation, before any work begins.",
+  },
+  {
+    question: "Why a starting price and not a fixed price?",
+    answer:
+      "Every business is different. The work depends on your systems, workflows, priorities and how much implementation is needed, so a fixed price list would be wrong for most companies. We publish where engagements start, then scope yours after understanding the business. On a free call we will tell you what we would do.",
+  },
+  {
+    question: "What happens during the initial setup?",
+    answer:
+      "We learn how the business operates, identify and prioritize AI opportunities, assess what is practical, and agree on the initial implementation scope and plan.",
+  },
+  {
+    question: "Is there a minimum commitment?",
+    answer:
+      "The engagement structure and any commitment terms will be agreed clearly before work begins. The ongoing model is a flat monthly fee; specific terms depend on the agreed scope.",
+  },
+  {
+    question: "Do you guarantee specific results?",
+    answer:
+      "No. We do not promise a particular level of savings, revenue growth or productivity improvement. We bring experienced business judgment and work hard to implement useful AI solutions, but the outcome depends on the business and the specific opportunity.",
+  },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Integration Services",
+    provider: { "@id": orgId(SITE_URL) },
+    serviceType: "Business consulting and AI integration",
+    url: absoluteUrl("/pricing/"),
+    description:
+      "An initial business assessment and setup to identify and prioritize practical AI opportunities, followed by a flat monthly engagement for implementation, integration and ongoing improvement.",
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Setup and assessment (first month)",
+        priceSpecification: { "@type": "PriceSpecification", minPrice: 250, priceCurrency: "USD" },
+      },
+      {
+        "@type": "Offer",
+        name: "Monthly engagement",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          minPrice: 2000,
+          priceCurrency: "USD",
+          unitText: "MONTH",
+        },
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/pricing/" jsonLd={jsonLd}>
+  <main id="main-content" class="flex-1">
+    <section class="site-wrap pb-xl pt-2xl lg:pb-2xl lg:pt-3xl">
+      <p class="type-label">Pricing</p>
+      <h1 class="type-h1 mt-md">A practical engagement, scoped to your business.</h1>
+      <p class="type-body-lg mt-lg max-w-prose">
+        We begin with a setup and assessment month, from $250, then move into a
+        flat monthly engagement, typically from $2,000 a month. The exact scope
+        and fee are agreed after we understand your business and what needs to
+        be done. Instead of a full-time hire, you get an outside AI lead who
+        owns the work.
+      </p>
+      <ul class="glance-grid mt-2xl" aria-label="At a glance">
+        {
+          glance.map((item) => (
+            <li class="experience-card experience-card--compact">
+              <p class="experience-card__value">{item.value}</p>
+              <p class="type-h4">{item.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-2xl">
+        <a class="btn-primary" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+      </p>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="plan-heading">
+      <p class="type-label">How the engagement works</p>
+      <h2 id="plan-heading" class="type-h2 mt-md">First understand, then implement and improve.</h2>
+      <div class="plan-grid mt-2xl">
+        <article class="plan-card" aria-labelledby="setup-title">
+          <p class="plan-card__label">First month · From $250</p>
+          <h3 id="setup-title" class="plan-card__title">Setup &amp; assessment</h3>
+          <p class="plan-card__lead type-body">
+            Understand the business, identify opportunities and agree on the first implementation priorities.
+          </p>
+          <ol class="plan-steps">
+            {
+              setup.map((item) => (
+                <li>
+                  <p class="plan-item__title">{item.title}</p>
+                  <p class="plan-item__body">{item.body}</p>
+                  {item.sub ? (
+                    <ul class="plan-sub">
+                      {item.sub.map((line) => <li>{line}</li>)}
+                    </ul>
+                  ) : null}
+                </li>
+              ))
+            }
+          </ol>
+          <p class="plan-card__foot">
+            The setup is based on your business and the opportunities identified together.
+          </p>
+        </article>
+
+        <article class="plan-card plan-card--plain" aria-labelledby="monthly-title">
+          <p class="plan-card__label">Flat monthly fee · Typically from $2,000/mo</p>
+          <h3 id="monthly-title" class="plan-card__title">Implementation &amp; improvement</h3>
+          <p class="plan-card__lead type-body">Continue building, integrating and refining AI-enabled operations.</p>
+          <ul class="plan-checks">
+            {
+              monthly.map((item) => (
+                <li>
+                  <p class="plan-item__title">{item.title}</p>
+                  <p class="plan-item__body">{item.body}</p>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="plan-card__foot">
+            See <a href={sitePath("/how-it-works/")}>the process</a> in full.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="why-heading">
+      <p class="type-label">Why this model</p>
+      <h2 id="why-heading" class="type-h2 mt-md">The work should fit the business, not a prebuilt package.</h2>
+      <p class="type-body mt-md max-w-prose">
+        Every business has different workflows, systems, people and priorities.
+        The right starting point—and the amount of implementation required—cannot
+        be determined from a generic price list. We first understand the
+        business, then agree on a practical scope and fee. The monthly engagement
+        gives us room to implement, learn, refine and address the next priorities
+        without pretending that every company needs the same solution.
+      </p>
+      <div class="compare-table mt-2xl">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Approach</th>
+              <th scope="col">How you pay</th>
+              <th scope="col">Who does the work</th>
+              <th scope="col">How the work fits your business</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparison.map((row) => (
+                <tr class={row.highlight ? "is-highlight" : undefined}>
+                  <td><strong>{row.model}</strong></td>
+                  <td>{row.pay}</td>
+                  <td>{row.work}</td>
+                  <td>{row.owner}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="fit-heading">
+      <p class="type-label">Who it's for</p>
+      <h2 id="fit-heading" class="type-h2 mt-md">Businesses ready to put AI to work.</h2>
+      <div class="fit-grid mt-2xl">
+        <div class="plan-card">
+          <p class="plan-card__label">A good fit if you</p>
+          <ul class="fit-list">
+            {fitYes.map((line) => <li>{line}</li>)}
+          </ul>
+        </div>
+        <div class="plan-card plan-card--plain">
+          <p class="plan-card__label" style="color: #5C5C5C">Not the right fit if you</p>
+          <ul class="fit-list fit-list--no">
+            {fitNo.map((line) => <li>{line}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="faq-heading">
+      <FaqBlock faqs={faqs} bordered={false} />
+    </section>
+  </main>
+  <CtaBanner />
+</BaseLayout>

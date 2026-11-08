@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="og-title og-desc">
+  <title id="og-title">No Black Swan</title>
+  <desc id="og-desc">Less AI Hype. More Impact.</desc>
+  <rect width="1200" height="630" fill="#FAF9F7"/>
+  <svg x="80" y="80" width="120" height="120" viewBox="0 0 448 448">
+  <g transform="translate(30.0 12.0)">
+    <defs><linearGradient id="nbs-mg" gradientUnits="userSpaceOnUse" x1="121" y1="53" x2="387" y2="423"><stop offset="0" stop-color="#A9B2F9"/><stop offset="1" stop-color="#6E7EEF"/></linearGradient></defs>
+    <path fill="#1A1A2E" d="M0.2 268.9L0.5 162.9L25.0 149.1C38.5 141.5 70.0 123.8 95.0 109.8C120.0 95.7 157.8 74.5 179.0 62.5C200.2 50.6 222.9 37.7 229.5 34.0C236.1 30.3 252.4 21.1 265.7 13.6C278.9 6.1 290.1 0.0 290.4 0.0C290.7 0.0 290.9 16.9 290.8 37.6L290.5 75.3L266.0 89.2C252.5 96.9 236.1 106.2 229.5 110.0C222.9 113.7 201.3 126.0 181.5 137.2C161.7 148.5 134.0 164.1 120.0 172.0C106.0 179.9 92.8 187.4 90.8 188.7L87.0 191.0L86.8 259.2L86.5 327.4L70.5 336.3C61.7 341.2 42.5 351.9 27.8 360.1C13.1 368.3 0.9 375.0 0.6 375.0C0.2 375.0 0.1 327.3 0.2 268.9Z"/>
+    <path fill="url(#nbs-mg)" d="M121.0 313.8L121.0 203.5L134.3 196.1C153.1 185.6 212.8 151.8 237.0 138.0C265.3 121.9 282.4 112.2 334.5 83.0C359.2 69.1 381.4 56.6 383.8 55.3L388.0 52.8L387.8 163.6L387.5 274.4L378.5 279.5C373.6 282.4 358.5 290.9 345.0 298.5C331.5 306.0 316.4 314.6 311.5 317.5C306.6 320.4 287.6 331.1 269.5 341.2C251.4 351.4 225.9 365.7 213.0 373.0C200.1 380.3 185.7 388.4 181.0 391.0C176.3 393.6 161.1 402.1 147.2 409.9C133.4 417.6 121.8 424.0 121.5 424.0C121.2 424.0 121.0 374.4 121.0 313.8Z"/>
+  </g>
+</svg>
+  <text x="80" y="340" fill="#1A1A2E" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="80" font-weight="300" letter-spacing="-2">No Black Swan</text>
+  <rect x="80" y="380" width="64" height="2" fill="#B5935A"/>
+  <text x="80" y="440" fill="#2D2D2D" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="34" font-weight="400">Less AI Hype. More Impact.</text>
+</svg>

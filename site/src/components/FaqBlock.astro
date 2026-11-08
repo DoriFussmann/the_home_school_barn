@@ -1,0 +1,26 @@
+---
+interface Props {
+  faqs: { question: string; answer: string }[];
+  bordered?: boolean;
+}
+
+const { faqs, bordered = true } = Astro.props;
+---
+
+<section class:list={[{ "rule mt-2xl pt-xl": bordered }]}>
+  <h2 id="faq-heading" class="type-h2">Frequently Asked Questions</h2>
+  <div class="faq-list mt-lg">
+    {
+      faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="type-h4">{faq.question}</summary>
+          <div class="faq-item__panel">
+            <div class="faq-item__body">
+              <p class="type-body">{faq.answer}</p>
+            </div>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>

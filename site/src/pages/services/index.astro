@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import FaqBlock from "../../components/FaqBlock.astro";
+import { sitePath } from "../../lib/url";
+
+const title = "AI Integration Services for Businesses | No Black Swan";
+const description =
+  "How No Black Swan identifies practical AI opportunities and integrates AI into business workflows, operations, internal tools and everyday decisions.";
+
+// Illustrative areas only: not claims of completed client projects.
+const glance = [
+  { value: "Workflow automation", label: "Reduce repetitive manual steps" },
+  { value: "Internal knowledge", label: "Make business information easier to find and use" },
+  { value: "Business operations", label: "Improve recurring processes and handoffs" },
+  { value: "AI-enabled tools", label: "Build practical assistants and tools around real business needs" },
+];
+
+const byArea = [
+  { title: "Operations", body: "Repetitive processes, handoffs and recurring administrative work" },
+  { title: "Finance", body: "Reporting, analysis, document workflows and recurring finance processes" },
+  { title: "Sales & Marketing", body: "Research, preparation, follow-up and internal workflows" },
+  { title: "Customer Operations", body: "Knowledge access, support workflows and service processes" },
+  { title: "Management & Teams", body: "Internal information, decision support and coordination" },
+];
+
+const bySolution = [
+  { title: "Internal knowledge and information workflows", body: "Make company information easier to organize, retrieve and use" },
+  { title: "Workflow automation", body: "Connect steps, tools and people across recurring processes" },
+  { title: "AI assistants and internal tools", body: "Support specific tasks using relevant business context" },
+];
+
+const passes = [
+  {
+    title: "Understand the work",
+    body: "Examine the current process, who is involved, what systems are used and where friction exists.",
+  },
+  {
+    title: "Choose the right opportunity",
+    body: "Identify where AI can add practical value and determine whether the idea is feasible and worth pursuing.",
+  },
+  {
+    title: "Integrate into operations",
+    body: "Design, build and connect the solution to the workflow, then test and refine it with the people who use it.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Do you work with a specific industry?",
+    answer:
+      "We begin by understanding the individual business rather than applying a fixed industry template. The free consultation helps determine whether our experience and approach are a fit.",
+  },
+  {
+    question: "What kinds of AI solutions do you implement?",
+    answer:
+      "It depends on the business. Work may include workflow automation, internal knowledge tools, AI assistants, document processes and integrations with existing systems.",
+  },
+  {
+    question: "Do we need an internal technical team?",
+    answer:
+      "Not necessarily. We discuss your current team, systems and requirements during the assessment and determine what support the work will need.",
+  },
+  {
+    question: "Do you replace our existing software?",
+    answer:
+      "Not by default. We first examine the tools and systems you already use and look for sensible ways to improve or connect them.",
+  },
+  {
+    question: "How do we get started?",
+    answer:
+      "Book a free consultation with Dori. Tell him about your business and he will share his perspective on where AI may be useful.",
+  },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/services/" jsonLd={jsonLd}>
+  <main id="main-content" class="flex-1">
+    <section class="site-wrap pb-xl pt-2xl lg:pb-2xl lg:pt-3xl">
+      <p class="type-label">What We Do</p>
+      <h1 class="type-h1 mt-md">Put AI to work across your business.</h1>
+      <p class="type-body-lg mt-lg max-w-prose">
+        We work with you to understand how your business operates, identify
+        where AI can make a difference, and integrate practical solutions into
+        the workflows and systems your team uses.
+      </p>
+      <p class="type-body mt-md max-w-prose">
+        In effect, we become your outside AI lead: we own the AI agenda month to
+        month, without you hiring a full-time head of AI.
+      </p>
+      <ul class="glance-grid mt-2xl" aria-label="Where AI can help">
+        {
+          glance.map((item) => (
+            <li class="experience-card experience-card--compact">
+              <p class="experience-card__value">{item.value}</p>
+              <p class="type-h4">{item.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-md type-body-sm text-muted">
+        Examples of areas where AI may be useful. The right opportunities depend
+        on each company’s operations, systems and priorities; these are not
+        claims of completed client projects.
+      </p>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="fit-heading">
+      <p class="type-label">Where AI can fit</p>
+      <h2 id="fit-heading" class="type-h2 mt-md">Start with the work, not the technology.</h2>
+      <div class="fit-grid mt-2xl">
+        <div class="plan-card">
+          <p class="plan-card__label">By area of the business</p>
+          <ul class="plan-checks">
+            {
+              byArea.map((row) => (
+                <li>
+                  <p class="plan-item__title">{row.title}</p>
+                  <p class="plan-item__body">{row.body}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="plan-card plan-card--plain">
+          <p class="plan-card__label">By type of solution</p>
+          <ul class="plan-checks">
+            {
+              bySolution.map((row) => (
+                <li>
+                  <p class="plan-item__title">{row.title}</p>
+                  <p class="plan-item__body">{row.body}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="approach-heading">
+      <p class="type-label">How we approach implementation</p>
+      <h2 id="approach-heading" class="type-h2 mt-md">Understand, prioritize, implement and improve.</h2>
+      <ol class="step-grid mt-2xl">
+        {
+          passes.map((pass, index) => (
+            <li class="experience-card experience-card--compact">
+              <p class="step-card__step">Step {index + 1}</p>
+              <p class="experience-card__value">{pass.title}</p>
+              <p class="type-h4">{pass.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="type-body mt-xl max-w-prose">
+        The result is not an AI demo or a list of tool recommendations. It is a
+        practical implementation designed around the way your business works,
+        with ongoing opportunities to improve it.
+      </p>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="business-led-heading">
+      <p class="type-label">Business-led, not tool-led</p>
+      <h2 id="business-led-heading" class="type-h2 mt-md">AI should solve a real problem.</h2>
+      <p class="type-body mt-md max-w-prose">
+        We do not start by pushing a particular platform or model. We start with
+        your business, then determine where and how AI belongs. The tools and
+        implementation approach follow the problem.
+      </p>
+      <p class="mt-xl flex flex-wrap items-center gap-md">
+        <a class="btn-primary" href={sitePath("/book-call/")}>Book a Free Consultation</a>
+        <a class="btn-quiet" href={sitePath("/how-it-works/")}>See the process</a>
+      </p>
+    </section>
+
+    <section class="site-wrap section-block rule" aria-labelledby="faq-heading">
+      <FaqBlock faqs={faqs} bordered={false} />
+    </section>
+  </main>
+  <CtaBanner />
+</BaseLayout>

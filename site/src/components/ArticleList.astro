@@ -1,0 +1,65 @@
+---
+import { getEntry } from "astro:content";
+import ArticleImage from "./ArticleImage.astro";
+import type { getPublishedArticles } from "../lib/articles";
+import { displayDate, isoDate, isLaterCalendarDay } from "../lib/dates";
+import { sitePath } from "../lib/url";
+
+interface Props {
+  articles: Awaited<ReturnType<typeof getPublishedArticles>>;
+}
+
+const { articles } = Astro.props;
+
+const tiles = (
+  await Promise.all(
+    articles.map(async (article) => {
+      const author = await getEntry("team", article.data.author);
+      const published = article.data.date;
+      const updated = article.data.updatedDate;
+      const showUpdated = !!updated && isLaterCalendarDay(updated, published);
+      return {
+        article,
+        authorName: author?.data.name ?? article.data.author,
+        topic: article.data.pillarKeyword ?? "",
+        showUpdated,
+        listDate: showUpdated && updated ? updated : published,
+      };
+    }),
+  )
+).sort((a, b) => b.listDate.valueOf() - a.listDate.valueOf());
+---
+
+<ul class="article-grid mt-xl" id="article-grid">
+  {
+    tiles.map(({ article, authorName, topic, showUpdated, listDate }) => (
+      <li
+        data-title={article.data.title.toLowerCase()}
+        data-topic={topic}
+      >
+        <article>
+          <a
+            class="article-tile no-underline"
+            href={sitePath(`/articles/${article.data.slug}/`)}
+          >
+            <div class="media-frame">
+              <ArticleImage
+                src={article.data.image}
+                alt={article.data.imageAlt}
+                variant="card"
+              />
+            </div>
+            <h2 class="type-h3 mt-md">{article.data.title}</h2>
+            <p class="type-body-sm mt-sm">
+              <time datetime={isoDate(listDate)}>
+                {showUpdated ? `Updated ${displayDate(listDate)}` : displayDate(listDate)}
+              </time>
+              <span aria-hidden="true"> · </span>
+              {authorName}
+            </p>
+          </a>
+        </article>
+      </li>
+    ))
+  }
+</ul>
