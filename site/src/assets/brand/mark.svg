@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 254" role="img" aria-label="The Homeschool Barn">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 249" role="img" aria-label="The Homeschool Barn">
   <!-- The Homeschool Barn logo: vector rebuild of the supplied artwork (Figtree, outlined). -->
   
-  <path fill="#000E29" fill-rule="evenodd" d="M169 0 L46 76 Q22 92 0 156 L0 254 L336 254 L336 156 Q314 92 290 76 Z M169 37 L102 76 Q54 104 48 141 L48 254 L288 254 L288 141 Q282 104 236 76 Z"/>
-    <g fill="#000E29"><rect x="145" y="81" width="20" height="20"/><rect x="174" y="81" width="20" height="20"/><rect x="145" y="109" width="20" height="20"/><rect x="174" y="109" width="20" height="20"/></g>
-    <rect fill="#BDBEFE" x="75" y="157" width="187" height="97"/>
-    <path fill="none" stroke="#000E29" stroke-width="12" d="M168 157 L168 254 M75 157 L162 254 M162 157 L75 254 M174 157 L262 254 M262 157 L174 254"/>
+  <path fill="#000E29" fill-rule="evenodd" d="M155 0 L48 65 L0 145 L0 249 L310 249 L310 145 L262 65 Z M155 25 L58 84 L24 145 L24 249 L286 249 L286 145 L252 84 Z"/>
+    <g fill="#000E29"><rect x="131" y="77" width="19" height="19"/><rect x="161" y="77" width="19" height="19"/><rect x="131" y="105" width="19" height="19"/><rect x="161" y="105" width="19" height="19"/></g>
+    <rect fill="#BDBEFE" x="61" y="153" width="188" height="96"/>
+    <path fill="none" stroke="#000E29" stroke-width="12" d="M155 153 L155 249 M61 153 L150 249 M150 153 L61 249 M160 153 L249 249 M249 153 L160 249"/>
 </svg>

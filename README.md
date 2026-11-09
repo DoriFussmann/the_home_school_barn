@@ -44,4 +44,4 @@ Without them, the site shows "opens soon" instead of the forms.
 
 ## Brand
 
-The logo (`site/src/assets/brand/`), favicon, `public/logo.png`, `public/og-default.(png|svg)` and the byline image are a vector rebuild of the supplied logo: Figtree Bold wordmark, navy `#000E29`, cream `#FFF4EA`, lavender `#BDBEFE`. Site colors and fonts are still the inherited design system.
+The logo (`site/src/assets/brand/`), favicon, `public/logo.png`, `public/og-default.(png|svg)` and the byline image are a vector rebuild of the supplied logo: Figtree Light wordmark, Montserrat tagline, navy `#000E29`, cream `#FFF4EA`, lavender `#BDBEFE`. Site colors and fonts are still the inherited design system.
